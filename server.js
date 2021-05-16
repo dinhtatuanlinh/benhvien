@@ -125,6 +125,9 @@ var Dich_vu = http.createServer(async function(req, res) {
                 var company = await database.getlist(companiesCollection, db, companyidargs)
 
                 data.session = sessionFunc.sessionFunc(fields.session);
+                for (var i = 0; i < data.session.length; i++) {
+                    data.session[i].regNum = 0;
+                }
                 data.companyinfo = company[0].companyinfo;
                 data.companyname = company[0].companyname;
                 data.logoname = company[0].logoname;
@@ -398,41 +401,60 @@ var Dich_vu = http.createServer(async function(req, res) {
             // console.log(fields);
             //path tmp trên server
             var data = {};
-
-            // data.attend = [];
-            var args = { _id: ObjectId(fields.companyId) };
-            var companydata = await database.getlist(companiesCollection, db, args);
-            companydata.session
-
-            data.location = fields.location
-            data.companyId = fields.companyId;
-            data.companyname = fields.companyname;
-            data.eventinfo = fields.eventinfo;
-            data.paticipantName = fields.paticipantName;
-            data.paticipantPhone = fields.paticipantPhone;
-            data.paticipantEmail = fields.paticipantEmail;
-            data.session = {};
             var a = fields.session.split('-');
-
+            data.session = {};
             data.session.year = a[0];
             data.session.month = a[1];
             data.session.date = a[2];
             data.session.buoi = a[3];
+            console.log(fields.companyId)
+                // data.attend = [];
+            var args = { _id: ObjectId(fields.companyId) };
+            var companydata = await database.getlist(companiesCollection, db, args);
+            // console.log(companydata[0].session);
+            var checkErrorSession = false;
+            for (var i = 0; i < companydata[0].session.length; i++) {
+                if (companydata[0].session[i].year === data.session.year &&
+                    companydata[0].session[i].month === data.session.month &&
+                    companydata[0].session[i].date === data.session.date &&
+                    companydata[0].session[i].buoi === data.session.buoi) {
+                    if (parseInt(companydata[0].session[i].number) > companydata[0].session[i].regNum) {
+                        companydata[0].session[i].regNum++;
+                        delete companydata[0]._id;
+                        await database.editARecord(companiesCollection, db, companydata[0], args);
+                        checkErrorSession = true;
+                        // console.log(companydata[0]);
+                    } else {
+                        res.writeHead(301, { Location: `${clienturl}full.html` });
+                        res.end();
+                    }
+                    break;
+                }
+            }
+            if (checkErrorSession) {
+                data.location = fields.location
+                data.companyId = fields.companyId;
+                data.companyname = fields.companyname;
+                data.eventinfo = fields.eventinfo;
+                data.paticipantName = fields.paticipantName;
+                data.paticipantPhone = fields.paticipantPhone;
+                data.paticipantEmail = fields.paticipantEmail;
+                var insertvalue = await database.insertdata(paticipantCollection, db, data);
 
-            var insertvalue = await database.insertdata(paticipantCollection, db, data);
-
-            // sendemail
-            var from = 'tuanlinh-aiamcorporation@gmail.com';
-            var to = data.paticipantEmail;
-            var subject = `Đăng ký tham gia sự kiện ${fields.eventinfo}`;
+                // sendemail
+                var from = 'tuanlinh-aiamcorporation@gmail.com';
+                var to = data.paticipantEmail;
+                var subject = `Đăng ký tham gia sự kiện ${fields.eventinfo}`;
 
 
-            var emailcontent = `Bạn đã đăng ký thành công tham gia sự kiện ${fields.eventinfo} của công ty ${fields.companyname}, vào buổi ${data.session.buoi} ngày ${data.session.date}-${data.session.month}-${data.session.year}, tại ${data.location}. Email này thay cho giấy mời. Truy cập vào link sau để sửa thông tin ${clienturl}memberform.html?paticipantinfo&${insertvalue.insertedId}`;
-            var emailresult = await email.sendemail(from, to, subject, emailcontent);
-            var note = to.replace(".com", "");
-            var smszalo = await sendsmszalo.send(data.paticipantPhone, note)
-
-
+                var emailcontent = `Bạn đã đăng ký thành công tham gia sự kiện ${fields.eventinfo} của công ty ${fields.companyname}, vào buổi ${data.session.buoi} ngày ${data.session.date}-${data.session.month}-${data.session.year}, tại ${data.location}. Email này thay cho giấy mời. Truy cập vào link sau để sửa thông tin ${clienturl}memberform.html?paticipantinfo&${insertvalue.insertedId}`;
+                var emailresult = await email.sendemail(from, to, subject, emailcontent);
+                var note = to.replace(".com", "");
+                var smszalo = await sendsmszalo.send(data.paticipantPhone, note)
+            } else {
+                res.writeHead(301, { Location: `${clienturl}sessionerror.html` });
+                res.end();
+            }
 
         });
         res.writeHead(301, { Location: `${clienturl}success.html` });

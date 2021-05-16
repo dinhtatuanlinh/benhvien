@@ -435,53 +435,52 @@
         var delay = async() => {
             calendar.forEach(element => {
                 // var datedata = element.month.split('-');
+                console.log(element);
+                if (parseInt(element.number) !== element.regNum) {
+                    var same = document.getElementById(`${element.year}${element.month}${element.date}`);
+                    // console.log(typeof(typeof same));
+                    if (same !== null) { //kiểm tra xem có ca khám có cùng ngày ko ví dụ công ty chọn cả sáng cả chiều
 
-                var same = document.getElementById(`${element.year}${element.month}${element.date}`);
-                // console.log(typeof(typeof same));
-                if (same !== null) {
-
-                    var label = document.createElement("label");
-                    label.setAttribute('class', 'picktime');
-                    if (element.buoi === 'sang') {
-                        label.innerHTML = 'sáng';
-                        label.setAttribute('id', `${element.year}-${element.month}-${element.date}-sang`)
-                        label.setAttribute('onclick', `select(${element.year}, ${element.month}, ${element.date}, 'sang')`)
+                        var label = document.createElement("label");
+                        label.setAttribute('class', 'picktime');
+                        if (element.buoi === 'sang') {
+                            label.innerHTML = 'sáng';
+                            label.setAttribute('id', `${element.year}-${element.month}-${element.date}-sang`)
+                            label.setAttribute('onclick', `select(${element.year}, ${element.month}, ${element.date}, 'sang')`)
+                        } else {
+                            label.innerHTML = 'chiều';
+                            label.setAttribute('id', `${element.year}-${element.month}-${element.date}-chieu`)
+                            label.setAttribute('onclick', `select(${element.year}, ${element.month}, ${element.date}, 'chieu')`)
+                        }
+                        same.appendChild(label);
+                        html = '';
+                        // console.log('abc');
                     } else {
-                        label.innerHTML = 'chiều';
-                        label.setAttribute('id', `${element.year}-${element.month}-${element.date}-chieu`)
-                        label.setAttribute('onclick', `select(${element.year}, ${element.month}, ${element.date}, 'chieu')`)
-                    }
-                    same.appendChild(label);
-                    html = '';
-                    console.log('abc');
-                } else {
-
-                    html += `
+                        console.log('abc');
+                        html += `
                                 <div id='${element.year}${element.month}${element.date}' class='slt'>
                                     <label class="pickDate"> ${element.date} Tháng ${element.month}</label>
                                     
                             `;
 
-                    if (element.buoi === 'sang') {
-                        html += `
+                        if (element.buoi === 'sang') {
+                            html += `
                         
                                     <label id="${element.year}-${element.month}-${element.date}-sang" class="picktime" onclick="select(${element.year}, ${element.month}, ${element.date}, 'sang')">Sáng</label>
                                 `;
-                    } else {
-                        html += `
+                        } else {
+                            html += `
                             <label id="${element.year}-${element.month}-${element.date}-chieu" class="picktime" onclick="select(${element.year}, ${element.month}, ${element.date}, 'chieu');">Chiều</label>
-                    `;
-                    }
+                            `;
+                        }
 
-
-
-                    html += `
+                        html += `
                                     
                                 </div>
                             `;
-
-
+                    }
                 }
+
 
 
             })
@@ -489,7 +488,7 @@
 
         delay().then(async() => {
             html = html.replace('undefined', ' ');
-            console.log(html);
+            // console.log(html);
             sessionselection.innerHTML += html;
         });
 

@@ -1,4 +1,4 @@
-const axios = require('axios');
+const axios = require('axios'); // module httprequest ajax
 
 function send(phone, content) {
     return new Promise(async(res, rej) => {
