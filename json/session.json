@@ -1,0 +1,86 @@
+[{
+  "_id": {
+    "$oid": "5fe49c7910b17b140cc4390d"
+  },
+  "ngaybuoi": [
+    "2020-12-25",
+    "2020-12-25",
+    "2020-12-28",
+    "2020-12-29"
+  ],
+  "startngaybuoi": [
+    "8",
+    "13",
+    "8",
+    "8"
+  ],
+  "endngaybuoi": [
+    "11",
+    "15",
+    "11",
+    "10"
+  ],
+  "numberbuoi": [
+    20,
+    30,
+    50,
+    80
+  ],
+  "companyId": "5fe49c7910b17b140cc4390c",
+  "session": "4",
+  "paticipantnumber": [
+    2,
+    6,
+    4,
+    3
+  ]
+},{
+  "_id": {
+    "$oid": "5fe4a2a710b17b140cc43910"
+  },
+  "ngaybuoi": [
+    "2020-12-25"
+  ],
+  "startngaybuoi": [
+    "9"
+  ],
+  "endngaybuoi": [
+    "14"
+  ],
+  "numberbuoi": [
+    20
+  ],
+  "companyId": "5fe4a2a710b17b140cc4390f",
+  "session": "1",
+  "paticipantnumber": [
+    6
+  ]
+},{
+  "_id": {
+    "$oid": "60376c19bd261476e908e55d"
+  },
+  "ngaybuoi": [
+    "2021-02-27",
+    "2021-02-28"
+  ],
+  "startngaybuoi": [
+    "8",
+    "13"
+  ],
+  "endngaybuoi": [
+    "11",
+    "16"
+  ],
+  "numberbuoi": [
+    10,
+    5
+  ],
+  "companyId": "60376c18bd2614960908e55c",
+  "session": "2",
+  "paticipantnumber": [
+    10,
+    5,
+    null,
+    null
+  ]
+}]

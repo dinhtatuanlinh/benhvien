@@ -1,0 +1,605 @@
+[{
+  "_id": {
+    "$oid": "5fe49bbcb6f03bbf1cdd008c"
+  },
+  "companyId": "5fe49b9cb6f03b5f83dd008a",
+  "sessionId": "5fe49b9db6f03b6fbbdd008b",
+  "companyname": "Jemmia",
+  "eventinfo": "Khoe trang sức",
+  "paticipantName": "dinh ta tuan linh",
+  "paticipantPhone": "+84945078855",
+  "paticipantEmail": "dinhtatuanlinh@gmail.com",
+  "attendsessions": [
+    2,
+    4
+  ],
+  "ngaybuoi": [
+    "2020-12-28",
+    "2020-12-30"
+  ],
+  "startngaybuoi": [
+    "13",
+    "18"
+  ],
+  "endngaybuoi": [
+    "16",
+    "23"
+  ]
+},{
+  "_id": {
+    "$oid": "603ce404f4e1c108ee4be3fc"
+  },
+  "companyId": "5fe4a2a710b17b140cc4390f",
+  "sessionId": "5fe4a2a710b17b140cc43910",
+  "companyname": "bách hóa kẹo mút",
+  "eventinfo": "khoe kẹo mút",
+  "paticipantName": "dinh ta tuan linh",
+  "paticipantPhone": "+84945078855",
+  "paticipantEmail": "dinhtatuanlinh@gmail.com",
+  "attendsessions": [
+    1
+  ],
+  "ngaybuoi": [
+    "2020-12-25"
+  ],
+  "startngaybuoi": [
+    "9"
+  ],
+  "endngaybuoi": [
+    "14"
+  ]
+},{
+  "_id": {
+    "$oid": "603de630f4e1c1ae3e4be3ff"
+  },
+  "companyId": "5fd9cf9d1f8d623820585c9d",
+  "companyname": "jemmia",
+  "eventinfo": "Khoe trang sức",
+  "paticipantName": "nguyen hao",
+  "paticipantPhone": 94587468846,
+  "paticipantEmail": "over-indulgence@hotmail.com",
+  "attendsessions": [
+    2,
+    4
+  ],
+  "sessionId": "60376c19bd261476e908e55d",
+  "ngaybuoi": [
+    "2021-02-28",
+    null
+  ],
+  "startngaybuoi": [
+    "13",
+    null
+  ],
+  "endngaybuoi": [
+    "16",
+    null
+  ]
+},{
+  "_id": {
+    "$oid": "603de630f4e1c178c84be400"
+  },
+  "companyId": "5fd9cf9d1f8d623820585c9d",
+  "companyname": "jemmia",
+  "eventinfo": "Khoe trang sức",
+  "paticipantName": "tran huy bao",
+  "paticipantPhone": 946581544,
+  "paticipantEmail": "dinhtatuanlinh@gmail.com",
+  "attendsessions": [
+    1,
+    2,
+    4
+  ],
+  "sessionId": "60376c19bd261476e908e55d",
+  "ngaybuoi": [
+    "2021-02-27",
+    "2021-02-28",
+    null
+  ],
+  "startngaybuoi": [
+    "8",
+    "13",
+    null
+  ],
+  "endngaybuoi": [
+    "11",
+    "16",
+    null
+  ]
+},{
+  "_id": {
+    "$oid": "603de64ef4e1c1c6c04be401"
+  },
+  "companyId": "5fd9cf9d1f8d623820585c9d",
+  "companyname": "jemmia",
+  "eventinfo": "Khoe trang sức",
+  "paticipantName": "tran huy bao",
+  "paticipantPhone": 946581544,
+  "paticipantEmail": "dinhtatuanlinh@gmail.com",
+  "attendsessions": [
+    1,
+    2,
+    4
+  ],
+  "sessionId": "60376c19bd261476e908e55d",
+  "ngaybuoi": [
+    "2021-02-27",
+    "2021-02-28",
+    null
+  ],
+  "startngaybuoi": [
+    "8",
+    "13",
+    null
+  ],
+  "endngaybuoi": [
+    "11",
+    "16",
+    null
+  ]
+},{
+  "_id": {
+    "$oid": "603de64ef4e1c131954be402"
+  },
+  "companyId": "5fd9cf9d1f8d623820585c9d",
+  "companyname": "jemmia",
+  "eventinfo": "Khoe trang sức",
+  "paticipantName": "nguyen hao",
+  "paticipantPhone": 94587468846,
+  "paticipantEmail": "over-indulgence@hotmail.com",
+  "attendsessions": [
+    2,
+    4
+  ],
+  "sessionId": "60376c19bd261476e908e55d",
+  "ngaybuoi": [
+    "2021-02-28",
+    null
+  ],
+  "startngaybuoi": [
+    "13",
+    null
+  ],
+  "endngaybuoi": [
+    "16",
+    null
+  ]
+},{
+  "_id": {
+    "$oid": "603ded74f4e1c160b64be403"
+  },
+  "companyId": "60376c18bd2614960908e55c",
+  "companyname": "PUI",
+  "eventinfo": "Sự kiện tiệc đầu xuân",
+  "paticipantName": "tuan linh",
+  "paticipantPhone": 946581544,
+  "paticipantEmail": "dinhtatuanlinh@gmail.com",
+  "attendsessions": [
+    1,
+    null
+  ],
+  "sessionId": "60376c19bd261476e908e55d",
+  "ngaybuoi": [
+    "2021-02-27",
+    null
+  ],
+  "startngaybuoi": [
+    "8",
+    null
+  ],
+  "endngaybuoi": [
+    "11",
+    null
+  ]
+},{
+  "_id": {
+    "$oid": "603ded74f4e1c1091a4be404"
+  },
+  "companyId": "60376c18bd2614960908e55c",
+  "companyname": "PUI",
+  "eventinfo": "Sự kiện tiệc đầu xuân",
+  "paticipantName": "nguyen hao",
+  "paticipantPhone": 94587468846,
+  "paticipantEmail": "over-indulgence@hotmail.com",
+  "attendsessions": [
+    2,
+    null
+  ],
+  "sessionId": "60376c19bd261476e908e55d",
+  "ngaybuoi": [
+    "2021-02-28",
+    null
+  ],
+  "startngaybuoi": [
+    "13",
+    null
+  ],
+  "endngaybuoi": [
+    "16",
+    null
+  ]
+},{
+  "_id": {
+    "$oid": "603df005f4e1c143a54be405"
+  },
+  "companyId": "5fe49c7910b17b140cc4390c#",
+  "companyname": "jemmia",
+  "eventinfo": "trang sức",
+  "paticipantName": "nguyen hao",
+  "paticipantPhone": 94587468846,
+  "paticipantEmail": "over-indulgence@hotmail.com",
+  "attendsessions": [
+    2,
+    null
+  ],
+  "sessionId": "5fe49c7910b17b140cc4390d",
+  "ngaybuoi": [
+    "2020-12-25",
+    null
+  ],
+  "startngaybuoi": [
+    "13",
+    null
+  ],
+  "endngaybuoi": [
+    "15",
+    null
+  ]
+},{
+  "_id": {
+    "$oid": "603df006f4e1c10c644be406"
+  },
+  "companyId": "5fe49c7910b17b140cc4390c#",
+  "companyname": "jemmia",
+  "eventinfo": "trang sức",
+  "paticipantName": "tuan linh",
+  "paticipantPhone": 946581544,
+  "paticipantEmail": "dinhtatuanlinh@gmail.com",
+  "attendsessions": [
+    3,
+    null
+  ],
+  "sessionId": "5fe49c7910b17b140cc4390d",
+  "ngaybuoi": [
+    "2020-12-28",
+    null
+  ],
+  "startngaybuoi": [
+    "8",
+    null
+  ],
+  "endngaybuoi": [
+    "11",
+    null
+  ]
+},{
+  "_id": {
+    "$oid": "603dfd3642128225cac038b2"
+  },
+  "companyId": "60376c18bd2614960908e55c",
+  "sessionId": "60376c19bd261476e908e55d",
+  "companyname": "PUI",
+  "eventinfo": "AMC",
+  "paticipantName": "dinh ta tuan linh",
+  "paticipantPhone": "+84945078855",
+  "paticipantEmail": "dinhtatuanlinh@gmail.com",
+  "attendsessions": [
+    1
+  ],
+  "ngaybuoi": [
+    "2021-02-27"
+  ],
+  "startngaybuoi": [
+    "8"
+  ],
+  "endngaybuoi": [
+    "11"
+  ]
+},{
+  "_id": {
+    "$oid": "606dc3c59993680ac569172a"
+  },
+  "companyId": "60376c18bd2614960908e55c",
+  "sessionId": "60376c19bd261476e908e55d",
+  "companyname": "PUI",
+  "eventinfo": "AMC",
+  "paticipantName": "dfasdfasfsa",
+  "paticipantPhone": "0945078855",
+  "paticipantEmail": "adfjaslkd@gmaiil.com",
+  "attendsessions": [
+    1
+  ],
+  "ngaybuoi": [
+    "2021-02-27"
+  ],
+  "startngaybuoi": [
+    "8"
+  ],
+  "endngaybuoi": [
+    "11"
+  ]
+},{
+  "_id": {
+    "$oid": "606dc441be8833db2ac504d0"
+  },
+  "companyId": "60376c18bd2614960908e55c",
+  "sessionId": "60376c19bd261476e908e55d",
+  "companyname": "PUI",
+  "eventinfo": "AMC",
+  "paticipantName": "dfasdfasfsa",
+  "paticipantPhone": "0945078855",
+  "paticipantEmail": "asdfaslkd@gmaiil.com",
+  "attendsessions": [
+    1
+  ],
+  "ngaybuoi": [
+    "2021-02-27"
+  ],
+  "startngaybuoi": [
+    "8"
+  ],
+  "endngaybuoi": [
+    "11"
+  ]
+},{
+  "_id": {
+    "$oid": "606dc4a4d685dadf3bcbec5c"
+  },
+  "companyId": "60376c18bd2614960908e55c",
+  "sessionId": "60376c19bd261476e908e55d",
+  "companyname": "PUI",
+  "eventinfo": "AMC",
+  "paticipantName": "dfasdfasfsa",
+  "paticipantPhone": "0945078855",
+  "paticipantEmail": "fadsfskd@gmaiil.com",
+  "attendsessions": [
+    1
+  ],
+  "ngaybuoi": [
+    "2021-02-27"
+  ],
+  "startngaybuoi": [
+    "8"
+  ],
+  "endngaybuoi": [
+    "11"
+  ]
+},{
+  "_id": {
+    "$oid": "606dc4dc46c65d1d6115252c"
+  },
+  "companyId": "60376c18bd2614960908e55c",
+  "sessionId": "60376c19bd261476e908e55d",
+  "companyname": "PUI",
+  "eventinfo": "AMC",
+  "paticipantName": "dfasdfasfsa",
+  "paticipantPhone": "0945078855",
+  "paticipantEmail": "sadfasdfkd@gmaiil.com",
+  "attendsessions": [
+    1
+  ],
+  "ngaybuoi": [
+    "2021-02-27"
+  ],
+  "startngaybuoi": [
+    "8"
+  ],
+  "endngaybuoi": [
+    "11"
+  ]
+},{
+  "_id": {
+    "$oid": "606dc5b0c0c932a9fd8783d7"
+  },
+  "companyId": "60376c18bd2614960908e55c",
+  "sessionId": "60376c19bd261476e908e55d",
+  "companyname": "PUI",
+  "eventinfo": "AMC",
+  "paticipantName": "dfasdfasfsa",
+  "paticipantPhone": "0945078855",
+  "paticipantEmail": "asdfsdfkd@gmaiil.com",
+  "attendsessions": [
+    1
+  ],
+  "ngaybuoi": [
+    "2021-02-27"
+  ],
+  "startngaybuoi": [
+    "8"
+  ],
+  "endngaybuoi": [
+    "11"
+  ]
+},{
+  "_id": {
+    "$oid": "606dc6c75d4da47df7f9a7d9"
+  },
+  "companyId": "60376c18bd2614960908e55c",
+  "sessionId": "60376c19bd261476e908e55d",
+  "companyname": "PUI",
+  "eventinfo": "AMC",
+  "paticipantName": "dfasdfasfsa",
+  "paticipantPhone": "0945078855",
+  "paticipantEmail": "dvfsdakd@gmaiil.com",
+  "attendsessions": [
+    1
+  ],
+  "ngaybuoi": [
+    "2021-02-27"
+  ],
+  "startngaybuoi": [
+    "8"
+  ],
+  "endngaybuoi": [
+    "11"
+  ]
+},{
+  "_id": {
+    "$oid": "606e6adf9c22ecef47873034"
+  },
+  "companyId": "5fe4a2a710b17b140cc4390f",
+  "sessionId": "5fe4a2a710b17b140cc43910",
+  "companyname": "bách hóa kẹo mút",
+  "eventinfo": "khoe kẹo mút",
+  "paticipantName": "dgsafd",
+  "paticipantPhone": "0945078855",
+  "paticipantEmail": "dinhtatuanlinh@gmail.com",
+  "attendsessions": [
+    1
+  ],
+  "ngaybuoi": [
+    "2020-12-25"
+  ],
+  "startngaybuoi": [
+    "9"
+  ],
+  "endngaybuoi": [
+    "14"
+  ]
+},{
+  "_id": {
+    "$oid": "606e6b92a01429a64cf6a7b1"
+  },
+  "companyId": "5fe4a2a710b17b140cc4390f",
+  "sessionId": "5fe4a2a710b17b140cc43910",
+  "companyname": "bách hóa kẹo mút",
+  "eventinfo": "khoe kẹo mút",
+  "paticipantName": "dgsafd",
+  "paticipantPhone": "0945078855",
+  "paticipantEmail": "adinhtatuanlinh@gmail.com",
+  "attendsessions": [
+    1
+  ],
+  "ngaybuoi": [
+    "2020-12-25"
+  ],
+  "startngaybuoi": [
+    "9"
+  ],
+  "endngaybuoi": [
+    "14"
+  ]
+},{
+  "_id": {
+    "$oid": "606e6c23a1459f36bb39a6a2"
+  },
+  "companyId": "5fe4a2a710b17b140cc4390f",
+  "sessionId": "5fe4a2a710b17b140cc43910",
+  "companyname": "bách hóa kẹo mút",
+  "eventinfo": "khoe kẹo mút",
+  "paticipantName": "dgsafd",
+  "paticipantPhone": "0945078855",
+  "paticipantEmail": "dinhtatuanlinh@gmail.com",
+  "attendsessions": [
+    1
+  ],
+  "ngaybuoi": [
+    "2020-12-25"
+  ],
+  "startngaybuoi": [
+    "9"
+  ],
+  "endngaybuoi": [
+    "14"
+  ]
+},{
+  "_id": {
+    "$oid": "606e6f02a1459f467139a6a3"
+  },
+  "companyId": "5fe4a2a710b17b140cc4390f",
+  "sessionId": "5fe4a2a710b17b140cc43910",
+  "companyname": "bách hóa kẹo mút",
+  "eventinfo": "khoe kẹo mút",
+  "paticipantName": "dgsafd",
+  "paticipantPhone": "0945078855",
+  "paticipantEmail": "tearbuttock@gmail.com",
+  "attendsessions": [
+    1
+  ],
+  "ngaybuoi": [
+    "2020-12-25"
+  ],
+  "startngaybuoi": [
+    "9"
+  ],
+  "endngaybuoi": [
+    "14"
+  ]
+},{
+  "_id": {
+    "$oid": "606e73cca1459fc27739a6a4"
+  },
+  "companyId": "5fe4a2a710b17b140cc4390f",
+  "sessionId": "5fe4a2a710b17b140cc43910",
+  "companyname": "bách hóa kẹo mút",
+  "eventinfo": "khoe kẹo mút",
+  "paticipantName": "tran huy bao",
+  "paticipantPhone": "0945078855",
+  "paticipantEmail": "dinhtatuanlinh@gmail.com",
+  "attendsessions": [
+    1
+  ],
+  "ngaybuoi": [
+    "2020-12-25"
+  ],
+  "startngaybuoi": [
+    "9"
+  ],
+  "endngaybuoi": [
+    "14"
+  ]
+},{
+  "_id": {
+    "$oid": "606e7bb84019ef3670a06a4c"
+  },
+  "companyId": "5fe49c7910b17b140cc4390c",
+  "companyname": "jemmia",
+  "eventinfo": "trang sức",
+  "paticipantName": "tuan linh",
+  "paticipantPhone": 945078855,
+  "paticipantEmail": "dinhtatuanlinh@gmail.com",
+  "attendsessions": [
+    3,
+    null
+  ],
+  "sessionId": "5fe49c7910b17b140cc4390d",
+  "ngaybuoi": [
+    "2020-12-28",
+    null
+  ],
+  "startngaybuoi": [
+    "8",
+    null
+  ],
+  "endngaybuoi": [
+    "11",
+    null
+  ]
+},{
+  "_id": {
+    "$oid": "606e7bb84019ef7265a06a4d"
+  },
+  "companyId": "5fe49c7910b17b140cc4390c",
+  "companyname": "jemmia",
+  "eventinfo": "trang sức",
+  "paticipantName": "nguyen hao",
+  "paticipantPhone": 94587468846,
+  "paticipantEmail": "over-indulgence@hotmail.com",
+  "attendsessions": [
+    2,
+    null
+  ],
+  "sessionId": "5fe49c7910b17b140cc4390d",
+  "ngaybuoi": [
+    "2020-12-25",
+    null
+  ],
+  "startngaybuoi": [
+    "13",
+    null
+  ],
+  "endngaybuoi": [
+    "15",
+    null
+  ]
+}]

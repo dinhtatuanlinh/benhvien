@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/formstyle.css?ver=1.0">
+    <link rel="stylesheet" href="css/calendar.css?ver=1.0">
+    <link rel="stylesheet" href="css/form.css?ver=1.0">
+
+    <title>Document</title>
+
+    <script src="js/data.js?ver=1.0"></script>
+    <script src="js/cookie.js?ver=1.0"></script>
+    <script>
+        var cookie = getCookie('login');
+        if (cookie !== null) {
+            var cookieres = sendCookie(cookie);
+
+            if (cookieres === 'empty') {
+                window.location.href = `${hostname}`;
+            }
+        } else {
+            window.location.href = `${hostname}`;
+        }
+        // console.log(cookieres[0]._id);
+    </script>
+</head>
+
+<body>
+
+    <div id="register">
+        <div id="companylogo"><img src="" alt="" id="blah"></div>
+        <div class="title">
+            <h1>Thêm khách hàng</h1>
+        </div>
+        <div class="notice"></div>
+        <span class="break"></span>
+        <div class="process">
+            <div class="box">
+                <p>1. Địa điểm</p>
+                <div class="processbar"></div>
+            </div>
+            <div class="box">
+                <p>2. Thông tin đặt hẹn</p>
+                <div class="processbar"></div>
+            </div>
+            <div class="box">
+
+                <p>3. Thời gian khám</p>
+                <div class="processbar"></div>
+            </div>
+
+        </div>
+        <form id="form" role="form" action="" method="post" enctype="multipart/form-data" onsubmit="return validation()">
+            <div class="steps hide">
+                <div class="form-group">
+                    <label>Địa điểm</label>
+                    <select name="location" id="location">
+                        <option value="1">Quận 1 - Trịnh Văn Cấn</option>
+                    </select>
+                </div>
+            </div>
+            <div class="steps hide">
+                <div class="form-group">
+                    <label>Thông tin công ty</label>
+                    <input id="companyinfo" class="form-control" name="companyinfo" value="">
+                </div>
+                <div class="form-group">
+                    <label>Tên công ty</label>
+                    <input id="companyname" class="form-control" name="companyname" value="">
+                </div>
+                <div class="form-group">
+                    <label>Logo công ty</label>
+                    <input id="logoinput" name="logo" value="" type="file">
+
+                </div>
+                <div class="form-group">
+                    <label>Chú thích</label>
+                    <input id="eventinfo" class="form-control" name="eventinfo" value="">
+                </div>
+                <div class="form-group">
+                    <label>Số khách</label>
+                    <input id="NOP" class="form-control" name="numberOfPeople" value="" type="number" min="1" onchange="changeNumber()">
+                    <input class="form-control" id="salerid" name="salerid" value="" type="hidden">
+                </div>
+            </div>
+
+
+            <div class="form-group" id="button">
+                <div id="prev" class="butt hide" onclick="prev()">Trở lại</div>
+                <div id="next" class="butt" onclick="next()">Tiếp theo</div>
+                <button id="submit" class="butt hide" type="submit">Submit </button>
+            </div>
+
+        </form>
+    </div>
+
+    <div id="hospitalinfo">
+        <div class="logo">
+            <a href="https://taimuihongsg.com">
+                <img src="imgs/logo-benhvien.png" alt="Tai mũi họng Sài Gòn">
+            </a>
+
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-location-arrow" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+                <a href="https://goo.gl/maps/tyfCDcRUXGs" target="_blank" rel="noopener noreferrer">9 – 15 Trịnh Văn Cấn, P. Cầu Ông Lãnh, Quận 1, Tp. HCM</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-phone" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+                <a href="tel:02838213456">(028) 38.213.456</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-print" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+                (028) 38.210.799
+            </div>
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-envelope" aria-hidden="true"></i>
+
+            </div>
+            <div class="text">
+                <a href="mailto:dathenkhamsuckhoe@taimuihongsg.com">dathenkhamsuckhoe@taimuihongsg.com</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-globe" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+                <a href="https://taimuihongsg.com" target="_blank" rel="noopener noreferrer">https://taimuihongsg.com</a>
+            </div>
+        </div>
+        <div class="maps">
+            <a href="https://goo.gl/maps/tyfCDcRUXGs" target="_blank" rel="noopener noreferrer"><img src="https://taimuihongsg.com/kham-dinh-ky/wp-content/uploads/2020/09/phong-kham-da-khoa-quoc-te-sai-gon-google-map_taimuihongsg.jpg" alt="" width="600" height="500"></a>
+        </div>
+    </div>
+
+    <script src="js/calendar.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        // edit form
+        var salerid = document.getElementById('salerid');
+        salerid.value = cookieres[0]._id;
+        var form = document.getElementById('form');
+        var currentUrl = window.location.href;
+        var url = new URL(currentUrl); //tách lấy phần request trong url
+        var params = url.search;
+        params = params.replace('?', '');
+        console.log(params);
+        // check có phải form sửa
+        if (params !== '') {
+            var danh_sach_cong_ty = lay_thong_tin_cong_ty('getcompany', params, cookieres[0]._id);
+            console.log(danh_sach_cong_ty);
+            document.getElementById('companyinfo').value = danh_sach_cong_ty[0].companyinfo;
+            document.getElementById('companyname').value = danh_sach_cong_ty[0].companyname;
+            document.getElementById('eventinfo').value = danh_sach_cong_ty[0].eventinfo;
+            document.getElementById('NOP').value = danh_sach_cong_ty[0].numberOfPeople;
+            // companylogo
+            var logo = document.getElementById('companylogo');
+            logo = logo.getElementsByTagName('img')[0];
+            logo.setAttribute("src", `${lh}req=getlogo&name=${danh_sach_cong_ty[0].logoname}`);
+            logo.setAttribute("alt", danh_sach_cong_ty[0].companyname);
+            form.setAttribute("action", `${lh}req=editcompany&id=${params}&salerid=${cookieres[0]._id}`);
+        } else {
+            form.setAttribute('action', `${lh}addcompany`);
+        }
+
+
+        // end edit form
+
+
+        var steps = document.getElementsByClassName('steps');
+        var box = document.getElementsByClassName('box');
+        box[0].classList.add('active');
+        steps[0].classList.remove('hide');
+        var i = 0;
+
+        function next() {
+            steps[i].classList.add('hide');
+
+            i++;
+            if (i >= box.length - 2) {
+                i = box.length - 2;
+                document.getElementById('next').classList.add('hide');
+                document.getElementById('submit').classList.remove('hide');
+            }
+            if (i >= 1) {
+                document.getElementById('prev').classList.remove('hide');
+
+            }
+            steps[i].classList.remove('hide');
+            box[i].classList.add('active');
+
+        }
+
+        function prev() {
+            steps[i].classList.add('hide');
+            box[i].classList.remove('active');
+            i--;
+            if (i <= 0) {
+                i = 0;
+                box[i].classList.add('active');
+                document.getElementById('prev').classList.add('hide');
+
+            }
+            if (i > 0) {
+                document.getElementById('prev').classList.remove('hide');
+            }
+            if (i < box.length - 1) {
+                document.getElementById('next').classList.remove('hide');
+                document.getElementById('submit').classList.add('hide');
+            }
+            steps[i].classList.remove('hide');
+
+        }
+
+        // select session
+        var date_picker = document.getElementsByClassName("date-picker")
+            // end select session
+            // preview logo
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $("#logoinput").change(function() {
+            readURL(this);
+        });
+        // end preview logo
+    </script>
+</body>
+
+</html>

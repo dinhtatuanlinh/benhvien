@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css?ver=1.0">
+    <link rel="stylesheet" href="css/mobile.css?ver=1.0" media="only screen and (max-width: 799px)">
+    <link rel="stylesheet" href="css/tablet.css?ver=1.0" media="only screen and (min-width: 800px) and (max-width: 1230px)">
+    <link rel="stylesheet" href="css/desktop.css?ver=1.0" media="only screen and (min-width: 1231px)">
+    <title>Document</title>
+    <script src="js/cookie.js"></script>
+    <script src="js/data.js?ver=1.0"></script>
+    <script>
+        var cookie = getCookie('login');
+        if (cookie !== null) {
+
+            var cookieres = sendCookie(cookie);
+            if (cookieres[0].role !== 'superadmin' && cookieres[0].role !== 'admin') {
+                window.location.href = `${hostname}`;
+            }
+            if (cookieres === 'empty') {
+                window.location.href = `${hostname}`;
+            }
+        } else {
+            window.location.href = `${hostname}`;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="loginpage">
+        <div class="wrapper">
+            <div class="logo"><img src="imgs/logo-benhvien.png" alt="Tai mũi họng Sài gòn"></div>
+            <form id="form" action="" role="form" method="post" enctype="multipart/form-data">
+                <input id="username" name="username" type="text" placeholder="username">
+                <input id="md5" type="text" name="password" readonly>
+                <input id="password" type="password" placeholder="password" onkeyup="getpassword()">
+                <input id="repassword" type="password" placeholder="repassword" onkeyup="checkpass()"><span id="noti" style="color: red;"></span>
+                <input id="name" name="name" type="text" placeholder="name">
+                <input id="birth" name="birth" type="date" placeholder="birthday">
+                <input id="phone" name="phone" type="number" placeholder="phone">
+                <input id="email" name="email" type="text" placeholder="email">
+                <input id="position" name="position" type="text" placeholder="position">
+                <input id="registertime" name="registertime" type="text" value="" readonly>
+                <select id="role" name="role">
+                    <option value="admin">admin</option>
+                    <option value="saler">saler</option>
+                    <option value="viewer">viewer</option>
+                </select>
+                <button type="submit">submit</button>
+            </form>
+        </div>
+
+    </div>
+    <script src="js/md5.js"></script>
+    <script>
+        var password = document.getElementById('password');
+        var repassword = document.getElementById('repassword');
+        var noti = document.getElementById('noti');
+        var registertime = document.getElementById('registertime');
+        registertime.value = new Date().toLocaleDateString();
+
+        var form = document.getElementById('form');
+        form.setAttribute("action", `${lh}register`)
+        var md5 = document.getElementById('md5');
+        md5.value = '';
+
+        function getpassword() {
+            var encrypt = MD5(password.value);
+            md5.value = encrypt;
+        }
+
+        function checkpass() {
+            if (password.value !== repassword.value) {
+
+                noti.innerHTML = 'password phải trùng';
+            } else {
+                noti.innerHTML = '';
+            }
+        }
+    </script>
+</body>
+
+</html>

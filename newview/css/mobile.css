@@ -1,0 +1,80 @@
+.hide-small {
+    display: none;
+}
+
+#header {
+    flex-direction: column;
+    justify-content: center;
+}
+
+#header #logo a {
+    display: block;
+    width: 211px;
+}
+
+#header #logo img {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#header #title h1 {
+    margin: 10px 0;
+    font-size: 25px;
+}
+
+#header #login {
+    display: flex;
+    justify-content: center;
+}
+
+#header #login #logout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#header #login form {
+    display: flex;
+    justify-content: space-between;
+}
+
+#header #login form div {
+    margin: 3px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: flex-start;
+}
+
+#header #login form label {
+    display: inline-block;
+    width: 80px;
+    margin-right: 3px;
+}
+
+#header #login form input {
+    width: 150px;
+}
+
+.row .box .col {
+    padding: 5px 10px;
+    min-width: 400px;
+    display: flex;
+}
+
+.comlogo {
+    justify-content: center;
+}
+
+.row .box .col .minibox {
+    padding: 0 5px;
+}
+
+.row .box .col .minibox p {
+    margin: 0;
+}
+
+.row .index {
+    line-height: 350px;
+    border-right: 1px solid #2c4ca1;
+}

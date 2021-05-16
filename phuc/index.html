@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Management</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <style>
+        .companylogo {
+            width: 100px;
+        }
+        
+        .del {
+            border: 1px solid #000;
+            display: inline;
+        }
+        
+        .row {
+            margin: 5px 0;
+        }
+        
+        .row a {
+            width: 150px;
+        }
+        
+        .copytext {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Danh Sách Công Ty</a>
+            </div>
+            <ul class="nav navbar-top-links navbar-right">
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <div class="navbar-default navbar-static-side" role="navigation">
+                <div class="sidebar-collapse">
+                    <ul class="nav" id="side-menu">
+
+                        <li>
+                            <a href="index.html">
+                                <i class="fa fa-dashboard fa-fw"></i> Danh sách công ty sự kiện
+                            </a>
+                        </li>
+
+
+                    </ul>
+                    <!-- /#side-menu -->
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+        </nav>
+        <div id="page-wrapper">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Đặt hẹn khám sức khỏe</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Danh Sách Công Ty KSK
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+
+                            <div class="zcontrols">
+
+                                <div class="pull-right">
+                                    <a href="form.html" class="btn btn-warning btn-addNew">Add New
+                                        </a>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <input type="checkbox" class="cbAll" />
+                                            </th>
+                                            <th>#</th>
+                                            <th>Logo</th>
+                                            <th>Tên công ty</th>
+                                            <th>Thông tin công ty</th>
+                                            <th>Thông tin sự kiên</th>
+                                            <!-- <th width="30%">Content</th> -->
+                                            <th>Số buổi</th>
+                                            <th>Gửi danh sách</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="list">
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/sb-admin.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="js/data.js?ver=1.0"></script>
+    <script src="js/qrcodejs/qrcode.min.js"></script>
+    <script>
+        var danh_sach_cong_ty = lay_thong_tin_cong_ty('getcompanylist', null);
+        var Th_Cha = document.getElementById('list');
+        var Chuoi_HTML = '';
+        var i = 1;
+
+        //console.log(danh_sach_cong_ty);
+        danh_sach_cong_ty.forEach(element => {
+            var session = getsession(element._id);
+            // console.log(session[0].ngaybuoi);
+            var batdau = session[0].ngaybuoi[0];
+            var ketthuc = session[0].ngaybuoi[session[0].ngaybuoi.length - 1];
+
+            Chuoi_HTML += `
+            <tr>
+                <td  >
+                    <input type="checkbox" name="cid" value="${element._id}" />
+                </td>
+                <td  >
+                    ${i}
+                </td>
+                <td  >
+                    <img class="companylogo" src="${lh}req=getlogo&name=${element.logoname}" alt="${element.companyname}">
+                </td>
+                <td  >
+                    <a href="paticipantlist.html?paticipantlist&${element._id}">${element.companyname}</a>
+                </td>
+                <td  >
+                    ${element.companyinfo}
+                </td>
+                
+                <td  >
+                    <a href="paticipantlist.html?paticipantlist&${element._id}">${element.eventinfo}</a>
+                    <p>Từ ngày: ${batdau}</p>
+                    <p>Tới ngày: ${ketthuc}</p>
+                </td>
+                <td  >
+                    ${element.session}
+                    
+                </td>
+                <td  >
+                    <form id="form" role="form" action="${lh}req=uploadpaticipantlist&amp;id=${element._id}" method="post" enctype="multipart/form-data">
+                        <input name="paticipantlist" value="" type="file">
+                        <button type="submit" class="btn btn-primary">Submit </button>
+                        <a href="https://noteatext.com/portfolio/phuc/danh_sach_tham_gia.xlsx" download>File excel mẫu</a>
+                    </form>
+                </td>
+                <td id="action">
+                    
+                        <div class="row">
+                            <div class="copytext" id='copytext-${element._id}'>${hostname}memberform.html?companyinfo&${element._id}</div>
+                            <a href="QRcode.html?${element._id}" type="button" class="btn btn-warning btn-sm">Lấy mã QR</a>
+                            <div class="btn btn-warning btn-sm" onclick="getlink('${element._id}')">Lấy link đăng ký</div>
+
+                        </div>
+                        <div class="row">
+                            <a href="form.html?companyinfo&${element._id}" type="button" class="btn btn-warning btn-sm">Sửa</a>
+                            <a href="#" value="${element._id}" onclick="lay_thong_tin_cong_ty('deletecompany', this.getAttribute('value'))" class="btn btn-danger btn-sm btn-delete">Xóa sự kiện</a>
+                        </div>
+                   
+                </td>
+            </tr>
+            `
+            i++;
+            // console.log(typeof element._id);
+        });
+        Th_Cha.innerHTML = Chuoi_HTML;
+        var side_menu_section = document.getElementById('side-menu');
+        var side_menu = '';
+        danh_sach_cong_ty.forEach(element => {
+            side_menu += `
+            <li>
+                <a href="paticipantlist.html?paticipantlist&${element._id}">${element.companyname}</a>
+            </li>`;
+        });
+        side_menu_section.innerHTML = side_menu;
+
+        function getlink(value) {
+
+            var str = `${hostname}memberform.html?companyinfo&${value}`;
+            console.log(str);
+            const el = document.createElement('textarea');
+            el.value = str;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            alert('Copied the text:' + el.value);
+
+        }
+    </script>
+</body>
+
+</html>

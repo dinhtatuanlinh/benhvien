@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/formstyle.css?ver=1.0">
+    <link rel="stylesheet" href="css/calendar.css?ver=1.0">
+    <link rel="stylesheet" href="css/form.css?ver=1.0">
+
+    <title>Document</title>
+
+    <script src="js/data.js?ver=1.0"></script>
+    <script src="js/cookie.js?ver=1.0"></script>
+    <script>
+        var cookie = getCookie('login');
+        if (cookie !== null) {
+            var cookieres = sendCookie(cookie);
+
+            if (cookieres === 'empty') {
+                window.location.href = `${hostname}`;
+            }
+        } else {
+            window.location.href = `${hostname}`;
+        }
+        console.log(cookieres[0]._id);
+    </script>
+</head>
+
+<body>
+    <div id="register">
+        <div id="companylogo"><img src="" alt="" id="blah"></div>
+        <div class="title">
+            <h1>Thêm khách hàng</h1>
+        </div>
+        <div class="notice"></div>
+        <span class="break"></span>
+        <div class="process">
+            <div class="box active">
+                <p>1. Địa điểm</p>
+                <div class="processbar "></div>
+            </div>
+            <div class="box active">
+                <p>2. Thông tin đặt hẹn</p>
+                <div class="processbar "></div>
+            </div>
+            <div class="box active">
+
+                <p>3. Thời gian khám</p>
+                <div class="processbar"></div>
+            </div>
+        </div>
+        <form id="form" role="form" action="" method="post" enctype="multipart/form-data" onsubmit="return validation()">
+            <div class="step">
+                <div class="wrapper">
+                    <div class="container-calendar">
+                        <h3 id="monthAndYear"></h3>
+                        <div class="footer-container-calendar">
+                            <label for="month">Jump To: </label>
+                            <select id="month" onchange="jump()">
+                                 <option value=0>Jan</option>
+                                 <option value=1>Feb</option>
+                                 <option value=2>Mar</option>
+                                 <option value=3>Apr</option>
+                                 <option value=4>May</option>
+                                 <option value=5>Jun</option>
+                                 <option value=6>Jul</option>
+                                 <option value=7>Aug</option>
+                                 <option value=8>Sep</option>
+                                 <option value=9>Oct</option>
+                                 <option value=10>Nov</option>
+                                 <option value=11>Dec</option>
+                             </select>
+                            <select id="year" onchange="jump()"></select>
+                        </div>
+                        <table class="table-calendar" id="calendar" data-lang="en">
+                            <thead id="thead-month"></thead>
+                            <tbody id="calendar-body"></tbody>
+                        </table>
+                    </div>
+                    <div class="sum">
+                        <input class="num" name="NOP" id="nop" value="" readonly>/<input class="num" id="inputNum" readonly>
+                    </div>
+                    <div id='sessionselection'>
+
+
+                    </div>
+                    <input name="companyid" id="companyid" type="text" class="hide" style="width: 100%" readonly>
+                    <input name="session" id="sendSessionData" type="text" class="hide" style="width: 100%" readonly>
+
+                </div>
+
+            </div>
+
+            <div class="form-group" id="button">
+                <button id="submit" class="butt" type="submit">Submit </button>
+            </div>
+
+        </form>
+    </div>
+
+    <div id="hospitalinfo">
+        <div class="logo">
+            <a href="https://taimuihongsg.com">
+                <img src="imgs/logo-benhvien.png" alt="Tai mũi họng Sài Gòn">
+            </a>
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-location-arrow" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+                <a href="https://goo.gl/maps/tyfCDcRUXGs" target="_blank" rel="noopener noreferrer">9 – 15 Trịnh Văn Cấn, P. Cầu Ông Lãnh, Quận 1, Tp. HCM</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-phone" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+                <a href="tel:02838213456">(028) 38.213.456</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-print" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+                (028) 38.210.799
+            </div>
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-envelope" aria-hidden="true"></i>
+
+            </div>
+            <div class="text">
+                <a href="mailto:dathenkhamsuckhoe@taimuihongsg.com">dathenkhamsuckhoe@taimuihongsg.com</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-globe" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+                <a href="https://taimuihongsg.com" target="_blank" rel="noopener noreferrer">https://taimuihongsg.com</a>
+            </div>
+        </div>
+        <div class="maps">
+            <a href="https://goo.gl/maps/tyfCDcRUXGs" target="_blank" rel="noopener noreferrer"><img src="https://taimuihongsg.com/kham-dinh-ky/wp-content/uploads/2020/09/phong-kham-da-khoa-quoc-te-sai-gon-google-map_taimuihongsg.jpg" alt="" width="600" height="500"></a>
+        </div>
+    </div>
+    <script src="js/calendar.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        var form = document.getElementById('form');
+        var sendsession = document.getElementById(`sendSessionData`);
+        var sessionselection = document.getElementById("sessionselection");
+        var currentUrl = window.location.href;
+        var url = new URL(currentUrl); //tách lấy phần request trong url
+        var params = url.search;
+        params = params.replace('?', '');
+        var args = params.split("&");
+        var NOP = parseInt(args[1]);
+        console.log(NOP);
+        document.getElementById('nop').value = args[1];
+        document.getElementById('companyid').value = args[0];
+        // get company
+        var danh_sach_cong_ty = lay_thong_tin_cong_ty('getcompany', args[0], cookieres[0]._id);
+        console.log(danh_sach_cong_ty);
+
+        // calendar
+
+        var monthyear = document.getElementById("monthAndYear").innerHTML;
+        monthyear = monthyear.split(' ');
+        var n = 1
+        monthDefault.forEach(e => {
+            if (e === monthyear[0]) {
+                monthyear = monthyear[1] + '-' + n;
+            } else {
+                n++;
+            }
+        })
+
+
+
+        function pushDataIntoCalendar(month) {
+            var calendar = getCalendar(month);
+            var html
+                // xắp xếp lại lịch
+            var a = [];
+            var b = [];
+            calendar.forEach(element => {
+
+                a.push(element.date);
+            })
+            a.sort(function(a, b) {
+                return a - b
+            });
+            var currentDate = new Date();
+            currentDate = currentDate.getDate();
+            console.log(currentDate);
+            a.forEach(element => {
+                calendar.forEach(e => {
+                    if (element === e.date) {
+                        b.push(e);
+                    }
+                })
+            })
+
+            console.log(b);
+            // end xắp xếp lại lịch
+            b.forEach(element => {
+                if (element.date >= currentDate) {
+                    var datedata = element.month.split('-');
+                    var dateSlot = document.querySelectorAll(`[data-date="${element.date}"]`);
+                    if (dateSlot.length > 0) {
+                        var checkMonth = dateSlot[0].getAttribute("data-month");
+                        var checkYear = dateSlot[0].getAttribute("data-year");
+                        if (checkYear === datedata[0] && checkMonth === datedata[1]) {
+                            var strong = document.createElement("strong");
+                            strong.innerHTML = `S: ${element.morningnumber}/${element.morning} <br> C: ${element.noonnumber}/${element.noon}`;
+                            dateSlot[0].appendChild(strong);
+                            if (element.morningnumber < element.morning || element.noonnumber < element.noon) {
+                                html += `
+                                <div class='slt'>
+                                    <label class="pickDate"> ${element.date} Tháng ${datedata[1]}</label>
+                                    <div class="box">
+                            `;
+
+                                if (element.morningnumber < element.morning) {
+                                    html += `
+                                    <div class="session-wrapper" id="${datedata[0]}-${datedata[1]}-${element.date}-sang"> 
+                                        <label class="pickSession">
+                                            Sáng ${element.morning - element.morningnumber}
+                                        </label>
+                                        <input class="addedNumber" type="text" onchange="inputNumber(${datedata[0]}, ${datedata[1]}, ${element.date}, 'sang')" min="0">
+                                    </div>
+                                `;
+                                }
+                                if (element.noonnumber < element.noon) {
+                                    html += `
+                                    <div class="session-wrapper" id="${datedata[0]}-${datedata[1]}-${element.date}-chieu"> 
+                                        <label class="pickSession">
+                                            chiều ${element.noon - element.noonnumber}
+                                        </label>
+                                        <input class="addedNumber" type="text" onchange="inputNumber(${datedata[0]}, ${datedata[1]}, ${element.date}, 'chieu')" min="0">
+                                    </div>
+                                    `;
+                                }
+                                html += `
+                                    </div>
+                                </div>
+                            `;
+                            }
+                        }
+                    }
+                }
+            })
+            html = html.replace('undefined', ' ');
+            sessionselection.innerHTML = html;
+            // console.log(sendsession.value)
+            if (sendsession.value !== '') {
+                var getselected = sendsession.value.split('+');
+                getselected.pop();
+                // console.log(getselected);
+                getselected.forEach(element => {
+                    var e = element.split('-');
+                    if (parseInt(document.getElementById('year').value) === parseInt(e[0]) && (parseInt(document.getElementById('month').value) + 1) === parseInt(e[1])) {
+                        document.getElementById(`${e[0]}-${e[1]}-${e[2]}-${e[3]}`).document.getElementsByClassName('pickSession')[0].classList.add('selected');
+                    }
+
+
+                })
+            }
+        }
+        var sendSessionData = '';
+        var customernumber
+
+
+        function inputNumber(year, month, date, buoi) {
+
+            var checkingString = year + '-' + month + '-' + date + '-' + buoi;
+
+            var addedNumber = document.getElementById(`${checkingString}`).getElementsByClassName('addedNumber')[0].value;
+            addedNumber = parseInt(addedNumber);
+            console.log(addedNumber);
+            if (isNaN(addedNumber)) {
+                document.getElementById(checkingString).classList.remove('selected');
+                document.getElementById(`${checkingString}`).getElementsByClassName('addedNumber')[0].value = '';
+                if (sendSessionData.search(checkingString) !== -1) {
+                    var removedata = sendSessionData.split('+');
+                    for (var i = 0; i < removedata.length; i++) {
+                        if (removedata[i].search(checkingString) !== -1) {
+
+                            sendSessionData = sendSessionData.replace((removedata[i] + '+'), '');
+
+                        }
+
+                    }
+                }
+            } else {
+                if (sendSessionData.search(checkingString) !== -1) {
+                    var removedata = sendSessionData.split('+');
+
+                    for (var i = 0; i < (removedata.length); i++) {
+                        if (removedata[i].search(checkingString) !== -1) {
+
+                            sendSessionData = sendSessionData.replace((removedata[i] + '+'), '');
+                            sendSessionData = sendSessionData + checkingString + '-' + addedNumber + '+';
+                            console.log(sendSessionData);
+                            var sumCustomers = tinhtong(sendSessionData);
+                            console.log(sumCustomers)
+                            if (sumCustomers > NOP) {
+                                alert('bạn đã nhập thừa số lượng khách hàng')
+                            }
+                        }
+
+                    }
+                    // console.log('abce');
+
+                } else {
+                    sendSessionData = sendSessionData + checkingString + '-' + addedNumber + '+';
+                    console.log(sendSessionData);
+                    var sumCustomers = tinhtong(sendSessionData);
+                    console.log(sumCustomers)
+                    if (sumCustomers > NOP) {
+                        alert('bạn đã nhập thừa số lượng khách hàng')
+                    }
+                }
+            }
+
+            sendSessionData = sendSessionData.replace('undefined', '')
+            sendsession.value = sendSessionData;
+        }
+
+        function changeNumber() {
+            sendsession.value = '';
+            sendSessionData = '';
+            customernumber = undefined;
+            var pickSession = document.getElementsByClassName('pickSession');
+            console.log(pickSession.length);
+            for (var i = 0; i < pickSession.length; i++) {
+                pickSession[i].classList.remove('selected');
+            }
+        }
+
+        function tinhtong(sendSessionData) {
+            var sessionDataArray = sendSessionData.split('+');
+            var sumCustomers = 0
+            for (var i = 0; i < sessionDataArray.length; i++) {
+                if (sessionDataArray[i] !== "") {
+                    var getNumber = sessionDataArray[i].split('-');
+                    sumCustomers += parseInt(getNumber[4]);
+                }
+
+            }
+            document.getElementById('inputNum').value = sumCustomers;
+            return sumCustomers;
+        }
+        changeNumber();
+
+
+        form.setAttribute('action', `${lh}updatesession`);
+        pushDataIntoCalendar(monthyear);
+
+        // end calendar
+    </script>
+</body>
+
+</html>

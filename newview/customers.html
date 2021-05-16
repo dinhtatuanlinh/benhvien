@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css?ver=2.0">
+    <link rel="stylesheet" href="css/mobile.css?ver=2.0" media="only screen and (max-width: 799px)">
+    <link rel="stylesheet" href="css/tablet.css?ver=2.0" media="only screen and (min-width: 800px) and (max-width: 1230px)">
+    <link rel="stylesheet" href="css/desktop.css?ver=2.0" media="only screen and (min-width: 1231px)">
+    <link rel="stylesheet" href="">
+    <title>Quản lý khách khám sức khỏe</title>
+    <script src="js/cookie.js"></script>
+    <script src="js/data.js?ver=2.0"></script>
+    <script>
+        var cookie = getCookie('login');
+        if (cookie !== null) {
+            var cookieres = sendCookie(cookie);
+            if (cookieres === 'empty') {
+                window.location.href = `${hostname}`;
+            }
+        } else {
+            window.location.href = `${hostname}`;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="header">
+        <div id="logo">
+            <a href="https://taimuihongsg.com"><img src="imgs/logo-taimuihongsg.jpg" alt="Bệnh viện tai mũi họng Sài Gòn"></a>
+        </div>
+        <div id="title">
+            <h1>Quản lý khám sức khỏe doanh nghiệp</h1>
+        </div>
+        <div id="login">
+            <div id="loginInput">
+                <div id="logout">
+                    <div id="user"></div>
+                    <div id="role"></div>
+                    <div id="time">
+                        <script>
+                            document.write(new Date().toLocaleDateString());
+                        </script>
+                    </div>
+                    <button onclick="logout()">Đăng xuất</button>
+                </div>
+            </div>
+            <div id="loginIcon" class="hide-medium hide-large"><i class="fa fa-users" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+    <div id="info" class="wrapper">
+        <div class="box">
+            <div>Số lượng khách khám: <span id="sum"></span></div>
+            <div>Số lượng công ty đã khám: <span id="oldsum"></span></div>
+            <div>Số lượng công ty chưa khám: <span id="newsum"></span></div>
+            <div>Số lượng người đã khám: <span id="donepeople"></span></div>
+            <div>Số lượng người chưa khám khám: <span id="notyetpeople"></span></div>
+        </div>
+        <div class="expand"><i class="fa fa-angle-double-down" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div id="search" class="wrapper">
+        <a class="button" id="addcustomer" href="">Thêm mới khách hàng</a>
+        <div id="sendlist">
+            <span>Gửi danh sách</span>
+            <form action="" role="form" method="post" enctype="multipart/form-data">
+                <input name="paticipantlist" value="" type="file">
+                <button type="submit" class="btn btn-primary">Submit </button>
+                <a href="https://noteatext.com/portfolio/taimuihongsg/danh_sach_tham_gia.xlsx" download>File excel mẫu</a>
+            </form>
+        </div>
+        <form action="">
+            <input type="text" name="search" placeholder="tìm kiếm công ty">
+            <button type="submit">search</button>
+        </form>
+    </div>
+    <div id="list" class="wrapper"></div>
+
+    <script src="js/qrcodejs/qrcode.min.js"></script>
+    <script>
+        var currentUrl = window.location.href;
+        var url = new URL(currentUrl); //tách lấy phần request trong url
+        var params = url.search;
+        params = params.replace('?', '');
+        var args = params.split("&");
+        var danhsachthamgia = lay_thong_tin_cong_ty(args[0], args[1]);
+        console.log(danhsachthamgia);
+        var list = document.getElementById('list');
+        var Chuoi_HTML = '';
+        var i = 1;
+        var sendlist = document.getElementById("sendlist").getElementsByTagName("form")[0];
+        sendlist.setAttribute("action", `${lh}req=uploadpaticipantlist&id=${args[1]}`);
+        var addcustomer = document.getElementById("addcustomer");
+        addcustomer.setAttribute("href", `customerform.html?companyinfo&${args[1]}`);
+        danhsachthamgia.forEach(element => {
+            console.log(element);
+
+            Chuoi_HTML += `
+            <div class="row">
+                <div class="index">${i}</div>
+                <div class="box">
+                    <div class="col">
+                        <span>Tên khách hàng: </span>
+                        <div class="minibox">
+                            ${element.paticipantName}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <span>Email khách hàng: </span>
+                        <div class="minibox">
+                            ${element.paticipantEmail}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <span>Số điện thoại khách hàng: </span>
+                        <div class="minibox">
+                            ${element.paticipantPhone}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <span>Tên công ty: </span>
+                        <div class="minibox">
+                            ${element.companyname}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <span>Thông tin khám bệnh: </span>
+                        <div class="minibox">
+                            ${element.eventinfo}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <span>Thời gian khám của khách hàng: buổi ${element.session.buoi} ngày ${element.session.date}-${element.session.month}-${element.session.year}</span>
+
+                    </div>
+                    <div class="col">
+                        <div class="action">
+                            <select id="require-${element._id}">
+                                <option value="edit">sửa</option>
+                                <option value="delete">Xóa</option>
+                            </select>
+                            <button onclick="action('${element._id}')">Thực thi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+            i++;
+        });
+        document.getElementById('sum').innerHTML = i - 1;
+        list.innerHTML = Chuoi_HTML;
+        console.log(args[1]);
+
+        function action(customerID) {
+            // console.log('abc');
+            var selection = document.getElementById(`require-${customerID}`).value;
+            if (selection === 'delete') {
+                lay_thong_tin_cong_ty('deletemember', customerID, cookieres[0]._id);
+                // window.location.href = `customers.html?paticipantlist&${args[1]}`;
+            } else if (selection === 'edit') {
+                window.location.href = `customerform.html?paticipantinfo&${customerID}`;
+            }
+        }
+
+        function logout() {
+            eraseCookie('login');
+            window.location.href = `${hostname}`;
+        }
+    </script>
+</body>
+
+</html>

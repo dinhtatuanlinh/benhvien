@@ -1,0 +1,29 @@
+[{
+  "_id": {
+    "$oid": "5fe49c7910b17b140cc4390c"
+  },
+  "companyinfo": "Trang sức",
+  "companyname": "Jemmia",
+  "logoname": "130863027_775764066675620_5749980115096363514_n.jpg",
+  "eventinfo": "Khoe trang sức",
+  "session": "4",
+  "paticipant": null
+},{
+  "_id": {
+    "$oid": "5fe4a2a710b17b140cc4390f"
+  },
+  "companyinfo": "bán kẹo mút",
+  "companyname": "bách hóa kẹo mút",
+  "logoname": "flash-sale-free-banner-11549972010qj3w1ps85m-removebg-preview.png",
+  "eventinfo": "khoe kẹo mút",
+  "session": "1"
+},{
+  "_id": {
+    "$oid": "60376c18bd2614960908e55c"
+  },
+  "companyinfo": "Sự kiện tiệc đầu xuân",
+  "companyname": "PUI",
+  "logoname": "Logo - Full.jpg",
+  "eventinfo": "AMC",
+  "session": "2"
+}]

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css?ver=1.0">
+    <link rel="stylesheet" href="css/mobile.css?ver=1.0" media="only screen and (max-width: 799px)">
+    <link rel="stylesheet" href="css/tablet.css?ver=1.0" media="only screen and (min-width: 800px) and (max-width: 1230px)">
+    <link rel="stylesheet" href="css/desktop.css?ver=1.0" media="only screen and (min-width: 1231px)">
+    <link rel="stylesheet" href="css/calendar.css?ver=1.0">
+    <title>Đăng ký khám bệnh</title>
+    <script src="js/data.js"></script>
+</head>
+
+<body>
+    <div id="register" class="backgroundform customerform">
+        <div class="wrapper">
+            <div id="heading">
+                <div id="comInfo">
+                    <div id="companynametitle"></div>
+                    <img id="companylogo" src="" alt="">
+                </div>
+
+                <div class="title">
+                    <h1>Đăng ký khám sức khỏe</h1>
+                </div>
+                <div class="logo"><img src="imgs/logo-benhvien.png" alt="Tai mũi họng Sài gòn"></div>
+            </div>
+            <form id="form" role="form" action="" method="post" enctype="multipart/form-data" onsubmit="return validation()">
+                <div class="form-group">
+                    <!--<label>Tên công ty</label>-->
+                    <input id="companyId" class="form-control" name="companyId" value="" readonly type="hidden">
+                    <input id="sessionId" class="form-control" name="sessionId" value="" readonly type="hidden">
+                    <input id="companyname" class="form-control" name="companyname" value="" readonly type="hidden">
+                    <input id="eventinfo" class="form-control" name="eventinfo" value="" readonly type="hidden">
+                </div>
+                <div class="form-group">
+                    <label>Tên khách hàng</label>
+                    <input id="paticipantName" class="form-control" name="paticipantName" value="">
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <input id="paticipantPhone" class="form-control" name="paticipantPhone" value="">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input id="paticipantEmail" class="form-control" name="paticipantEmail" value="">
+                </div>
+                <div class="form-group">
+                    <label>Số buổi khám của công ty</label>
+                    <input id="session" class="form-control" name="session" value="" readonly>
+                </div>
+                <div id='customerselection'>
+
+
+                </div>
+                <div id="calendar">
+                    <div class="container-calendar">
+                        <h3 id="monthAndYear"></h3>
+
+                        <table class="table-calendar" id="calendar" data-lang="en">
+                            <thead id="thead-month"></thead>
+                            <tbody id="calendar-body"></tbody>
+                        </table>
+
+                        <div class="footer-container-calendar">
+                            <label for="month">Jump To: </label>
+                            <select id="month" onchange="jump()">
+                                 <option value=0>Jan</option>
+                                 <option value=1>Feb</option>
+                                 <option value=2>Mar</option>
+                                 <option value=3>Apr</option>
+                                 <option value=4>May</option>
+                                 <option value=5>Jun</option>
+                                 <option value=6>Jul</option>
+                                 <option value=7>Aug</option>
+                                 <option value=8>Sep</option>
+                                 <option value=9>Oct</option>
+                                 <option value=10>Nov</option>
+                                 <option value=11>Dec</option>
+                             </select>
+                            <select id="year" onchange="jump()"></select>
+                        </div>
+
+                    </div>
+                </div>
+                <input class="form-control" name="id" value="" type="hidden">
+                <input class="form-control" id="salerid" name="salerid" value="" type="hidden">
+                <div class="form-group">
+                    <button type="submit">Submit </button>
+                    <a class="button" href="index.html">Cancel</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <script src="js/calendar.js"></script>
+    <script>
+        var form = document.getElementById('form');
+
+        var currentUrl = window.location.href;
+        var url = new URL(currentUrl); //tách lấy phần request trong url
+        var params = url.search;
+        params = params.replace('?', '');
+        var args = params.split("&");
+
+
+
+        form.setAttribute('action', `${lh}addpaticipant`);
+        // console.log(args[1]);
+        if (args[0] === 'paticipantinfo') {
+            var paticipantinfo = lay_thong_tin_cong_ty(args[0], args[1]);
+            // console.log(paticipantinfo);
+            var thong_tin_cong_ty = lay_thong_tin_cong_ty('companyinfo', paticipantinfo[0].companyId);
+            var sessiondata = getsession(paticipantinfo[0].companyId);
+            var form = document.getElementById('form');
+            form.setAttribute('action', `${lh}req=editpaticipant&id=${paticipantinfo[0]._id}`);
+        } else if (args[0] === 'companyinfo') {
+            var thong_tin_cong_ty = lay_thong_tin_cong_ty(args[0], args[1]);
+            var sessiondata = getsession(args[1]);
+        }
+
+
+        // thêm thông tin title
+        var companynametitle = document.getElementById('companynametitle');
+
+        companynametitle.innerHTML = 'Chương trình khám sức khỏe của công ty ' + thong_tin_cong_ty[0].companyname;
+
+
+        console.log(thong_tin_cong_ty);
+        // console.log(sessiondata);
+        // console.log(thong_tin_cong_ty[0]._id);
+        var form = document.getElementById('form');
+        // var companyinfo = document.getElementById('companyinfo');
+        var companyId = document.getElementById('companyId');
+        var sessionId = document.getElementById('sessionId');
+
+        var companyname = document.getElementById('companyname');
+        var logo = document.getElementById('companylogo');
+
+        var eventinfo = document.getElementById('eventinfo');
+        var paticipantName = document.getElementById("paticipantName");
+        var paticipantPhone = document.getElementById("paticipantPhone");
+        var paticipantEmail = document.getElementById("paticipantEmail");
+        var session = document.getElementById('session');
+        // companyinfo.setAttribute("value", thong_tin_cong_ty[0].companyinfo);
+        companyId.setAttribute("value", thong_tin_cong_ty[0]._id);
+        sessionId.setAttribute("value", sessiondata[0]._id);
+        companyname.setAttribute("value", thong_tin_cong_ty[0].companyname);
+
+        logo.setAttribute("src", `${lh}req=getlogo&name=${thong_tin_cong_ty[0].logoname}`);
+        logo.setAttribute("alt", thong_tin_cong_ty[0].companyname);
+
+        eventinfo.setAttribute("value", thong_tin_cong_ty[0].eventinfo);
+        session.setAttribute("value", thong_tin_cong_ty[0].session);
+        var html = `<label>Bạn sẽ tham gia khi nào? </label> `;
+        if (args[0] === 'paticipantinfo') {
+            paticipantName.setAttribute("value", paticipantinfo[0].paticipantName);
+            paticipantPhone.setAttribute("value", paticipantinfo[0].paticipantPhone);
+            paticipantEmail.setAttribute("value", paticipantinfo[0].paticipantEmail);
+            var j = 0;
+            for (var i = 0; i < parseInt(thong_tin_cong_ty[0].session); i++) {
+                if (i === paticipantinfo[0].attendsessions[j] - 1) {
+                    html += `
+                            <div class="form-group">
+                                <input type="radio" id="buoi${i+1}" name="buoi" value="${i+1}" checked><span>&nbsp; Buổi ${i+1}: Vào ngày <strong>${sessiondata[0].ngaybuoi[i]}</strong>, từ <strong>${sessiondata[0].startngaybuoi[i]}h</strong> tới <strong>${sessiondata[0].endngaybuoi[i]}h</strong>, số người đã tham gia: <strong>${sessiondata[0].paticipantnumber[i]}</strong>/<strong>${sessiondata[0].numberbuoi[i]}</strong></span>
+                            </div>
+                        `;
+                    j++;
+                } else {
+                    if (sessiondata[0].paticipantnumber[i] === sessiondata[0].numberbuoi[i] || sessiondata[0].paticipantnumber[i] > sessiondata[0].numberbuoi[i]) {
+                        html += `
+                            <div class="form-group">=
+                                <span>&nbsp; Buổi ${i+1}: Vào ngày <strong>${sessiondata[0].ngaybuoi[i]}</strong> <strong class="enough">Đã đủ người tham gia</strong></span>
+                            </div>
+                        `;
+                    } else {
+                        html += `
+                            <div class="form-group">
+                                <input type="radio" id="buoi${i+1}" name="buoi" value="${i+1}"><span>&nbsp; Buổi ${i+1}: Vào ngày <strong>${sessiondata[0].ngaybuoi[i]}</strong>, số người đã tham gia: <strong>${sessiondata[0].paticipantnumber[i]}</strong>/<strong>${sessiondata[0].numberbuoi[i]}</strong></span>
+                            </div>
+                        `;
+                    }
+
+                }
+            }
+        } else if (args[0] === 'companyinfo') {
+            for (var i = 0; i < parseInt(thong_tin_cong_ty[0].session); i++) {
+                if (sessiondata[0].paticipantnumber[i] === sessiondata[0].numberbuoi[i] || sessiondata[0].paticipantnumber[i] > sessiondata[0].numberbuoi[i]) {
+                    html += `
+                    <div class="form-group">=
+                        <span>&nbsp; Buổi ${i+1}: Vào ngày <strong>${sessiondata[0].ngaybuoi[i]}</strong><strong class="enough">Đã đủ người tham gia</strong></span>
+                    </div>
+                    `;
+                } else {
+                    html += `
+                    <div class="form-group">
+                        <input type="radio" id="buoi${i+1}" name="buoi" value="${i+1}"><label for="buoi${i+1}">&nbsp; Buổi ${i+1}: Vào ngày <strong>${sessiondata[0].ngaybuoi[i]}</strong>, số người đã tham gia: <strong>${sessiondata[0].paticipantnumber[i]}</strong>/<strong>${sessiondata[0].numberbuoi[i]}</strong></label>
+                    </div>
+                `;
+                }
+
+            }
+        }
+
+
+        var sessionselection = document.getElementById("customerselection");
+        sessionselection.innerHTML = html;
+    </script>
+</body>
+
+</html>

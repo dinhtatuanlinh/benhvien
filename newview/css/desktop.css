@@ -1,0 +1,62 @@
+.hide-large {
+    display: none;
+}
+
+#header {
+    height: 120px;
+    justify-content: space-between;
+}
+
+#header #logo {
+    flex: 1;
+}
+
+#header #title {
+    flex: 1;
+}
+
+#header #login {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#header #title h1 {
+    margin: 0;
+}
+
+#header #login form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#header #login form div {
+    margin: 3px 0;
+    display: flex;
+    justify-content: center;
+}
+
+#header #login form label {
+    display: inline-block;
+    width: 80px;
+    margin-right: 3px;
+}
+
+#header #login form input {
+    width: 150px;
+}
+
+.row .index {
+    line-height: 115px;
+    border-right: 1px solid #2c4ca1;
+}
+
+.row .box {
+    justify-content: space-between!;
+}
+
+.row .box .col {
+    padding: 5px 20px;
+    width: 180px;
+}

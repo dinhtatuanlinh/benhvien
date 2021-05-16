@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Management - Add</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url(images/blue-gradient-colors-gradient-blue-color-gradient-background-photoshop.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        #logo {
+            width: 100px;
+        }
+        
+        .hours {
+            display: inline-block;
+            width: 35px;
+            border: 1px solid #666666;
+            text-align: center;
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+        
+        .sessionwrapper {
+            margin-top: 5px;
+        }
+        
+        .disable {
+            background-color: red;
+            display: inline-block;
+            width: 35px;
+            border: 1px solid #666666;
+            text-align: center;
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+        
+        .unenable {
+            background-color: blue;
+            display: inline-block;
+            width: 35px;
+            border: 1px solid #666666;
+            text-align: center;
+            margin-right: 5px;
+            margin-top: 5px;
+        }
+        
+        #get {
+            display: inline-block;
+            border: 1px solid #666666;
+            text-align: center;
+        }
+        
+        .row {
+            width: 60%;
+            margin: 0 auto;
+        }
+        
+        body>.row>.panel {
+            -webkit-box-shadow: 0 10px 6px -6px #777;
+            -moz-box-shadow: 0 10px 6px -6px #777;
+            box-shadow: 0 10px 6px -6px #777;
+            box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+            border-radius: 5px;
+            position: relative;
+            z-index: 1;
+            background: inherit;
+            overflow: hidden;
+        }
+        
+        body>.row>.panel:before {
+            content: "";
+            position: absolute;
+            background: inherit;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+            filter: blur(10px);
+            margin: -20px;
+        }
+        
+        body>.row>.panel>.panel-heading {
+            box-shadow: 0 10px 6px -6px #777;
+            box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+            border-radius: 5px;
+            position: relative;
+            z-index: 1;
+            background: inherit;
+            overflow: hidden;
+        }
+        
+        body>.row>.panel>.panel-heading:before {
+            content: "";
+            position: absolute;
+            background: inherit;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
+            filter: blur(10px);
+            margin: -20px;
+        }
+        
+        .panel-heading {
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            text-transform: capitalize;
+        }
+        
+        #form input {
+            background: rgba(255, 255, 255, .5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Tạo Sự Kiện Khám Sức Khỏe
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div>
+                        <div class="alert alert-danger" role="alert">
+                            <ul>
+                                <li>Name: không được rỗng</li>
+                                <li>Status: chọn một trạng thái</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <form id="form" role="form" action="" method="post" enctype="multipart/form-data" onsubmit="return validation()">
+                        <div class="form-group">
+                            <label>Thông tin công ty</label>
+                            <input id="companyinfo" class="form-control" name="companyinfo" value="">
+                        </div>
+                        <div class="form-group">
+                            <label>Tên công ty</label>
+                            <input id="companyname" class="form-control" name="companyname" value="">
+                        </div>
+                        <div class="form-group">
+                            <label>Logo công ty</label>
+                            <input id="logoinput" name="logo" value="" type="file">
+                            <img id="logo" src="" alt="">
+                        </div>
+                        <div class="form-group">
+                            <label>Thông tin sự kiện</label>
+                            <input id="eventinfo" class="form-control" name="eventinfo" value="">
+                        </div>
+                        <div class="form-group">
+                            <label>Số buổi</label>
+                            <input id="session" class="form-control" name="session" value="" type="number" min="0">
+                        </div>
+                        <div id='sessionselection'>
+
+
+                        </div>
+                        <input class="form-control" name="id" value="" type="hidden">
+                        <button type="submit" class="btn btn-primary">Submit </button>
+                        <a type="button" href="index.html" class="btn btn-default">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/sb-admin.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="js/data.js?ver=1.0"></script>
+    <script>
+        var companyinfo = document.getElementById('companyinfo');
+        var companyname = document.getElementById('companyname');
+        var logoinput = document.getElementById("logoinput");
+        var eventinfo = document.getElementById('eventinfo');
+        var session = document.getElementById("session");
+        var sessionselection = document.getElementById("sessionselection");
+        var form = document.getElementById("form");
+
+        var currentUrl = window.location.href;
+        var url = new URL(currentUrl); //tách lấy phần request trong url
+        var params = url.search;
+        params = params.replace('?', '');
+        var args = params.split("&");
+
+        form.setAttribute("action", `${lh}addcompany`);
+        if (args[0]) {
+            var thong_tin_cong_ty = lay_thong_tin_cong_ty(args[0], args[1]);
+            console.log(thong_tin_cong_ty);
+            var sessiondata = getsession(args[1]);
+            // console.log(sessiondata);
+            if (args[0] == 'companyinfo') {
+                form.setAttribute("action", `${lh}req=editcompany&id=${args[1]}`);
+                companyinfo.setAttribute("value", thong_tin_cong_ty[0].companyinfo);
+                companyname.setAttribute("value", thong_tin_cong_ty[0].companyname);
+                logo.setAttribute("src", `${lh}req=getlogo&name=${thong_tin_cong_ty[0].logoname}`);
+                logo.setAttribute("alt", thong_tin_cong_ty[0].companyname);
+                eventinfo.setAttribute("value", thong_tin_cong_ty[0].eventinfo);
+                session.setAttribute("value", thong_tin_cong_ty[0].session);
+                var html = ``;
+
+                for (var i = 1; i <= parseInt(sessiondata[0].session); i++) {
+                    var span = [];
+                    for (var j = 7; j <= 24; j++) {
+                        if (j >= parseInt(sessiondata[0].startngaybuoi[i - 1]) && j <= parseInt(sessiondata[0].endngaybuoi[i - 1])) {
+                            span[j] = `<span value="${i}&${j}" class="active disable ${j}">${j}h</span>`;
+                        } else {
+                            span[j] = `<span value="${i}&${j}" class="active hours ${j}">${j}h</span>`;
+                        }
+
+                    }
+                    // console.log(span);
+                    html += `
+                        <div id="sessionwrapper${i}">
+                            <label>Buổi ${i}:</label>
+                            <input id="${i}" class="buoi" type="date" name="ngaybuoi${i}" value="${sessiondata[0].ngaybuoi[i-1]}">
+                            <div>${span[7]}${span[8]}${span[9]}${span[10]}${span[11]}</div>
+                            <div>${span[12]}${span[13]}${span[14]}${span[15]}${span[16]}</div>
+                            <div>${span[17]}${span[18]}${span[19]}${span[20]}${span[21]}</div>
+                            <div>${span[22]}${span[23]}${span[24]}</div>
+                            <input name="startngaybuoi${i}" class="time" value="${sessiondata[0].startngaybuoi[i-1]}" type="hidden">
+                            <input name="endngaybuoi${i}" class="time" value="${sessiondata[0].endngaybuoi[i-1]}" type="hidden">
+                            <label>Số lượng người tham gia buổi ${i}</label>
+                            <input id="numberbuoi${i}" class="form-control" name="numberbuoi${i}" value="${sessiondata[0].numberbuoi[i-1]}">
+                        </div>
+                    `;
+                }
+
+                sessionselection.innerHTML = html;
+            }
+            var buoi = document.getElementsByClassName("buoi");
+            for (var i = 0; i < buoi.length; i++) {
+                // tạo tính ngăng chọn ngày
+                buoi[i].oninput = function(event) {
+                    var sessionNo = parseInt(event.target.id);
+                    var sessionwrapper = document.getElementById(`sessionwrapper${sessionNo}`);
+                    var time = sessionwrapper.getElementsByClassName("time");
+                    var active = sessionwrapper.getElementsByClassName('active');
+                    for (var j = 0; j < active.length; j++) {
+                        if (active[j].classList.contains("disable")) {
+                            active[j].classList.remove("disable");
+                            active[j].classList.add("hours");
+                        }
+                    }
+                    for (var j = 0; j < active.length; j++) {
+
+                        active[j].onclick = (ev) => {
+
+                            ev.target.classList.toggle("hours");
+                            ev.target.classList.toggle("disable");
+
+                            var disable = sessionwrapper.getElementsByClassName("disable");
+
+                            time[0].setAttribute("value", disable[0].getAttribute("value").split("&")[1]);
+                            time[1].setAttribute("value", disable[disable.length - 1].getAttribute("value").split("&")[1]);
+                            for (var k = parseInt(time[0].getAttribute("value")); k <= parseInt(time[1].getAttribute("value")); k++) {
+                                // console.log('a')
+                                sessionwrapper.getElementsByClassName(`${k}`)[0].classList.remove("hours");
+                                sessionwrapper.getElementsByClassName(`${k}`)[0].classList.add("disable");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // var session = document.getElementById('session');
+        // var sessionselection = document.getElementById('sessionselection');
+
+
+        function xu_ly_session(sessionvalue) {
+            var html = ``;
+            if (Number.isInteger(sessionvalue) && sessionvalue > 0) {
+                for (var i = 1; i <= sessionvalue; i++) {
+                    html += `
+                        <div id="sessionwrapper${i}">
+                            <label>Buổi ${i}:</label>
+                            <input id="${i}" class="buoi" type="date" name="ngaybuoi${i}" value="">
+                            <div><span value="${i}&7" class="active hours 7">7h</span><span value="${i}&8" class="active hours 8">8h</span><span value="${i}&9" class="active hours 9">9h</span><span value="${i}&10" class="active hours 10">10h</span><span value="${i}&11" class="active hours 11">11h</span></div>
+                            <div><span value="${i}&12" class="active hours 12">12h</span><span value="${i}&13" class="active hours 13">13h</span><span value="${i}&14" class="active hours 14">14h</span><span value="${i}&15" class="active hours 15">15h</span><span value="${i}&16" class="active hours 16">16h</span></div>
+                            <div><span value="${i}&17" class="active hours 17">17h</span><span value="${i}&18" class="active hours 18">18h</span><span value="${i}&19" class="active hours 19">19h</span><span value="${i}&20" class="active hours 20">20h</span><span value="${i}&21" class="active hours 21">21h</span></div>
+                            <div><span value="${i}&22" class="active hours 22">22h</span><span value="${i}&23" class="active hours 23">23h</span><span value="${i}&24" class="active hours 24">24h</span></div>
+                            <input name="startngaybuoi${i}" class="time" value="" type="hidden">
+                            <input name="endngaybuoi${i}" class="time" value="" type="hidden">
+                            <label>Số lượng người tham gia buổi ${i}</label>
+                            <input id="numberbuoi${i}" class="form-control" name="numberbuoi${i}" value="">
+                        </div>
+                    `;
+                }
+
+                sessionselection.innerHTML = html;
+            } else {
+                alert('Giá trị bạn nhập ko hợp lệ');
+            }
+
+        }
+
+        session.oninput = function(event) {
+            var sessionvalue = parseInt(event.currentTarget.value);
+            xu_ly_session(sessionvalue);
+            adddateaction(sessionvalue);
+        };
+
+        function adddateaction(sessionvalue) {
+            var buoi = document.getElementsByClassName("buoi");
+            for (var i = 0; i < buoi.length; i++) {
+                // tạo tính ngăng chọn ngày
+                buoi[i].oninput = function(event) {
+                    var sessionNo = parseInt(event.target.id);
+                    var sessionwrapper = document.getElementById(`sessionwrapper${sessionNo}`);
+                    // var unenable = sessionwrapper.getElementsByClassName('unenable');
+                    var active = sessionwrapper.getElementsByClassName('active');
+
+                    var buoivalue = event.target.value;
+                    // xóa class disable để refresh lại bảng giờ
+                    for (var j = 0; j < active.length; j++) {
+                        if (active[j].classList.contains("disable")) {
+                            active[j].classList.remove("disable");
+                            active[j].classList.add("hours");
+                        }
+                    }
+                    // if (cancledisable.length !== 0) {
+                    //     do {
+                    //         cancledisable[0].classList.toggle('hours');
+                    //         cancledisable[0].classList.toggle('disable');
+                    //     } while (cancledisable.length > 0);
+                    // }
+                    // end xóa class disable
+
+                    // xóa value ở ô input giờ bắt đầu và giờ kết thúc
+                    var time = sessionwrapper.getElementsByClassName("time");
+                    time[0].setAttribute("value", "");
+                    time[1].setAttribute("value", "");
+                    // end xóa value ô input
+
+                    var hours = sessionwrapper.getElementsByClassName("hours");
+
+                    // tạo tính năng chọn giờ
+                    for (var j = 0; j < hours.length; j++) {
+                        //     if (hours[j].classList.contains("hours")) {
+                        //         delete hours[j];
+                        //     }
+                        hours[j].onclick = (ev) => {
+                            ev.target.classList.toggle("hours");
+                            ev.target.classList.toggle("disable");
+
+                            var disable = sessionwrapper.getElementsByClassName("disable");
+                            // console.log(disable[0].getAttribute("value").split("&")[1]);
+                            time[0].setAttribute("value", disable[0].getAttribute("value").split("&")[1]);
+                            time[1].setAttribute("value", disable[disable.length - 1].getAttribute("value").split("&")[1]);
+                            for (var k = parseInt(time[0].getAttribute("value")); k <= parseInt(time[1].getAttribute("value")); k++) {
+                                // console.log('a')
+                                sessionwrapper.getElementsByClassName(`${k}`)[0].classList.remove("hours");
+                                sessionwrapper.getElementsByClassName(`${k}`)[0].classList.add("disable");
+                            }
+                        }
+                    }
+                    // end tính năng hẹn giờ
+
+                }
+            }
+        }
+
+        function validation() {
+            console.log(session.value);
+            // alert(companyinfo);
+            // if (companyinfo === '' || companyname === '' || logoinput.files.length === 0 || eventinfo === '' || session === 0) {
+            if (companyinfo.value === '' || companyname.value === '' || eventinfo.value === '' || session.value === 0) {
+                alert('Nhập đầy đủ dữ liệu');
+                return false;
+
+            }
+            if (logoinput.files.length === 0 && document.getElementById("logo").getAttribute("src") === "") {
+                alert('upload logo công ty');
+                return false;
+            }
+            for (var i = 1; i <= session.value; i++) {
+                var wrapper = document.getElementById(`sessionwrapper${i}`);
+                // console.log(wrapper);
+                var time = wrapper.getElementsByClassName('time');
+                var numberbuoi = document.getElementById(`numberbuoi${i}`);
+                if (time[0].value === '' || time[1].value === '' || numberbuoi.value === '') {
+                    alert('Nhập đầy đủ dữ liệu');
+                    return false;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

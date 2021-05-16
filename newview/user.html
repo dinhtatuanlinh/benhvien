@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css?ver=1.0">
+    <link rel="stylesheet" href="css/mobile.css?ver=1.0" media="only screen and (max-width: 799px)">
+    <link rel="stylesheet" href="css/tablet.css?ver=1.0" media="only screen and (min-width: 800px) and (max-width: 1230px)">
+    <link rel="stylesheet" href="css/desktop.css?ver=1.0" media="only screen and (min-width: 1231px)">
+    <link rel="stylesheet" href="">
+    <title>Quản lý user</title>
+</head>
+
+<body>
+    <div id="header">
+        <div id="logo">
+            <a href="https://taimuihongsg.com"><img src="imgs/logo-taimuihongsg.jpg" alt="Bệnh viện tai mũi họng Sài Gòn"></a>
+        </div>
+        <div id="title">
+            <h1>Quản lý user</h1>
+        </div>
+        <div id="login">
+            <div id="loginInput">
+
+                <div id="logout" class="invisible">
+                    <div id="user"></div>
+                    <div id="role"></div>
+                    <div id="time">
+                        <script>
+                            document.write(new Date().toLocaleDateString());
+                        </script>
+                    </div>
+                    <button onclick="logout()">Đăng xuất</button>
+                </div>
+            </div>
+            <div id="loginIcon" class="hide-medium hide-large"><i class="fa fa-users" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+    <div id="info" class="wrapper">
+        <div class="box">
+            <div>Số lượng user: <span id="sum"></span></div>
+            <div>Số lượng công ty đã khám: <span id="oldsum"></span></div>
+            <div>Số lượng công ty chưa khám: <span id="newsum"></span></div>
+            <div>Số lượng người đã khám: <span id="donepeople"></span></div>
+            <div>Số lượng người chưa khám khám: <span id="notyetpeople"></span></div>
+        </div>
+        <div class="expand"><i class="fa fa-angle-double-down" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div id="search" class="wrapper">
+        <button>Thêm mới user</button>
+        <form action="">
+            <input type="text" name="search" placeholder="tìm kiếm user">
+            <button type="submit">search</button>
+        </form>
+    </div>
+    <div id="list" class="wrapper"></div>
+    <script src="js/data.js?ver=1.0"></script>
+    <script src="js/qrcodejs/qrcode.min.js"></script>
+    <script>
+        var danh_sach_user = lay_thong_user('userlist');
+        var list = document.getElementById('list');
+        var Chuoi_HTML = '';
+        var i = 1;
+        danh_sach_cong_ty.forEach(element => {
+            var session = getsession(element._id);
+            // console.log(element);
+            var batdau = session[0].ngaybuoi[0];
+            var ketthuc = session[0].ngaybuoi[session[0].ngaybuoi.length - 1];
+            Chuoi_HTML += `
+            <div class="row">
+                <div class="index">${i}</div>
+                <div class="box">
+                    <div class="col comlogo">
+                        <img class="companylogo" src="${lh}req=getlogo&name=${element.logoname}" alt="${element.companyname}">
+                    </div>
+                    <div class="col">
+                        <span>Tên công ty: </span>
+                        <div class="minibox">
+                            <a href="paticipantlist.html?paticipantlist&${element._id}">${element.companyname}</a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <span>Thông tin công ty:</span>
+                        <div class="minibox">
+                            ${element.companyinfo}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <span>Thông tin khám sức khỏe: </span>
+                        <div class="minibox">
+                            ${element.eventinfo}
+                            <p>Từ ngày: ${batdau}</p>
+                            <p>Tới ngày: ${ketthuc}</p> 
+                        </div>
+                    </div>
+                    <div class="col">
+                        <span>Số buổi</span>
+                        <div class="minibox">
+                            ${element.session}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <span>Gửi danh sách</span>
+                        <form id="form" role="form" action="${lh}req=uploadpaticipantlist&amp;id=${element._id}" method="post" enctype="multipart/form-data">
+                            <input name="paticipantlist" value="" type="file">
+                            <button type="submit" class="btn btn-primary">Submit </button>
+                            <a href="https://noteatext.com/portfolio/phuc/danh_sach_tham_gia.xlsx" download>File excel mẫu</a>
+                        </form>
+                    </div>
+                    <div class="col">
+                        <div class="action">
+                            <select id="require-${element._id}">
+                                <option value="getlink">Lấy link đăng ký</option>
+                                <option value="getQR">Lấy mã QR</option>
+                                <option value="register">Tới trang đăng ký</option>
+                                <option value="edit">Sửa</option>
+                                <option value="delete">Xóa</option>
+                            </select>
+                            <button onclick="action('${element._id}')">Thực thi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+            i++;
+            // console.log(typeof element._id);
+        });
+    </script>
+</body>
+
+</html>

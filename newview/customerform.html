@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/formstyle.css?ver=2.0">
+    <link rel="stylesheet" href="css/calendar.css?ver=2.0">
+    <link rel="stylesheet" href="css/form.css?ver=2.0">
+
+    <title>Document</title>
+
+    <script src="js/data.js?ver=2.0"></script>
+    <script src="js/cookie.js?ver=2.0"></script>
+    <script>
+        var cookie = getCookie('login');
+        if (cookie !== null) {
+            var cookieres = sendCookie(cookie);
+
+            if (cookieres === 'empty') {
+                window.location.href = `${hostname}`;
+            }
+        } else {
+            window.location.href = `${hostname}`;
+        }
+        // console.log(cookieres[0]._id);
+    </script>
+</head>
+
+<body>
+    <div id="register">
+        <div id="companylogo"><img src="" alt="" id="blah"></div>
+        <div id="title">
+            <h1>Khách hàng </h1>
+        </div>
+        <div class="notice">
+            <div><i class="fa fa-edit fa-2x" style="color:#088edd" aria-hidden="true"></i></div>
+            <div>VUI LÒNG NHỊN ĂN TRƯỚC 8 TIẾNG VÀ CHỈ UỐNG NƯỚC TINH KHIẾT CHO ĐẾN KHI HOÀN TẤT LẤY MẪU XÉT NGHIỆM/ SIÊU ÂM</div>
+        </div>
+        <span class="break"></span>
+        <div class="process">
+            <div class="box">
+                <p>1. Địa điểm</p>
+                <div class="processbar"></div>
+            </div>
+            <div class="box">
+                <p>2. Thời gian khám</p>
+
+                <div class="processbar"></div>
+            </div>
+            <div class="box">
+
+                <p>3. Thông tin đặt hẹn</p>
+                <div class="processbar"></div>
+            </div>
+
+        </div>
+        <form id="form" role="form" action="" method="post" enctype="multipart/form-data" onsubmit="return validation()">
+            <div class="steps hide">
+                <div class="form-group">
+                    <label>Địa điểm</label>
+                    <select name="location" id="location">
+                        <option value="1">Quận 1 - Trịnh Văn Cấn</option>
+                    </select>
+                </div>
+            </div>
+            <div class="steps hide">
+                <div class="bookly-box">
+
+                    <h2><strong>Lưu ý khi khám sức khỏe:</strong></h2><br>
+                    <h2><span style="font-size: 22px; color: #1e73be;"><strong><a style="color: #1e73be;" href="https://taimuihongsg.com/dich-vu/quy-trinh-kham-suc-khoe-cong-ty/" target="_blank" rel="noopener">- Quy trình khám sức khỏe công ty</a></strong></span></h2><br>
+                    <h2><span style="color: #1e73be;"><strong><a style="color: #1e73be;" href="https://taimuihongsg.com/luu-y-lay-mau-xet-nghiem-kham-suc-khoe/" target="_blank" rel="noopener">- Lưu ý lấy mẫu xét nghiệm</a></strong></span></h2><br>
+                    <hr><br>
+                    <span style="color: #1e73be;"><strong>Cách đặt hẹn: </strong></span><br> Chọn ngày và buổi bạn muốn khám để đặt hẹn khám bệnh.</div>
+                <div class="wrapper">
+                    <div class="container-calendar">
+                        <h3 id="monthAndYear"></h3>
+                        <div class="footer-container-calendar">
+                            <label for="month">Jump To: </label>
+                            <select id="month" onchange="jump()">
+                                         <option value=0>Jan</option>
+                                         <option value=1>Feb</option>
+                                         <option value=2>Mar</option>
+                                         <option value=3>Apr</option>
+                                         <option value=4>May</option>
+                                         <option value=5>Jun</option>
+                                         <option value=6>Jul</option>
+                                         <option value=7>Aug</option>
+                                         <option value=8>Sep</option>
+                                         <option value=9>Oct</option>
+                                         <option value=10>Nov</option>
+                                         <option value=11>Dec</option>
+                                     </select>
+                            <select id="year" onchange="jump()"></select>
+                        </div>
+                        <table class="table-calendar" id="calendar" data-lang="en">
+                            <thead id="thead-month"></thead>
+                            <tbody id="calendar-body"></tbody>
+                        </table>
+                    </div>
+                    <div id='sessionselection'>
+
+
+                    </div>
+
+                    <input name="session" id="sendSessionData" type="text" class="hide" style="width: 100%" readonly>
+                    <input class="form-control" name="NOP" id="nop" value="" type="hidden" readonly>
+                </div>
+
+
+            </div>
+            <div class="steps hide">
+                <div class="form-group">
+                    <input id="companyId" class="form-control" name="companyId" value="" readonly type="hidden">
+
+                    <input id="companyname" class="form-control" name="companyname" value="" readonly type="hidden">
+                    <input id="eventinfo" class="form-control" name="eventinfo" value="" readonly type="hidden">
+                </div>
+                <div class="form-group">
+                    <label>Tên khách hàng</label>
+                    <input id="paticipantName" class="form-control" name="paticipantName" value="">
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <input id="paticipantPhone" class="form-control" name="paticipantPhone" value="">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input id="paticipantEmail" class="form-control" name="paticipantEmail" value="">
+                </div>
+            </div>
+            <div class="form-group" id="button">
+                <div id="prev" class="butt hide" onclick="prev()">Trở lại</div>
+                <div id="next" class="butt" onclick="next()">Tiếp theo</div>
+                <button id="submit" class="butt hide" type="submit">Submit </button>
+            </div>
+
+        </form>
+    </div>
+    </div>
+    <div id="hospitalinfo">
+        <div class="logo">
+            <a href="https://taimuihongsg.com">
+                <img src="imgs/logo-benhvien.png" alt="Tai mũi họng Sài Gòn">
+            </a>
+
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-location-arrow" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+                <a href="https://goo.gl/maps/tyfCDcRUXGs" target="_blank" rel="noopener noreferrer">9 – 15 Trịnh Văn Cấn, P. Cầu Ông Lãnh, Quận 1, Tp. HCM</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-phone" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+                <a href="tel:02838213456">(028) 38.213.456</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-print" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+                (028) 38.210.799
+            </div>
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-envelope" aria-hidden="true"></i>
+
+            </div>
+            <div class="text">
+                <a href="mailto:dathenkhamsuckhoe@taimuihongsg.com">dathenkhamsuckhoe@taimuihongsg.com</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="fonticons"><i class="fa fa-globe" aria-hidden="true"></i>
+            </div>
+            <div class="text">
+                <a href="https://taimuihongsg.com" target="_blank" rel="noopener noreferrer">https://taimuihongsg.com</a>
+            </div>
+        </div>
+        <div class="maps">
+            <a href="https://goo.gl/maps/tyfCDcRUXGs" target="_blank" rel="noopener noreferrer"><img src="https://taimuihongsg.com/kham-dinh-ky/wp-content/uploads/2020/09/phong-kham-da-khoa-quoc-te-sai-gon-google-map_taimuihongsg.jpg" alt="" width="600" height="500"></a>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        function generate_year_range(start, end) {
+            var years = "";
+            for (var year = start; year <= end; year++) {
+                years += "<option value='" + year + "'>" + year + "</option>";
+            }
+            return years;
+        }
+
+        today = new Date();
+        currentMonth = today.getMonth();
+        currentYear = today.getFullYear();
+        selectYear = document.getElementById("year");
+        selectMonth = document.getElementById("month");
+
+
+        createYear = generate_year_range(1970, 2050);
+        /** or
+         * createYear = generate_year_range( 1970, currentYear );
+         */
+
+        document.getElementById("year").innerHTML = createYear;
+
+        var calendar = document.getElementById("calendar");
+        var lang = calendar.getAttribute('data-lang');
+
+        var months = "";
+        var days = "";
+
+        var monthDefault = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        var dayDefault = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+        if (lang == "en") {
+            months = monthDefault;
+            days = dayDefault;
+        } else if (lang == "id") {
+            months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            days = ["Ming", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
+        } else if (lang == "fr") {
+            months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+            days = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+        } else {
+            months = monthDefault;
+            days = dayDefault;
+        }
+
+
+        var $dataHead = "<tr>";
+        for (dhead in days) {
+            $dataHead += "<th data-days='" + days[dhead] + "'>" + days[dhead] + "</th>";
+        }
+        $dataHead += "</tr>";
+
+        //alert($dataHead);
+        document.getElementById("thead-month").innerHTML = $dataHead;
+
+
+        monthAndYear = document.getElementById("monthAndYear");
+        showCalendar(currentMonth, currentYear);
+
+
+
+        function next() {
+            currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
+            currentMonth = (currentMonth + 1) % 12;
+            var monthYear = currentYear + '-' + (currentMonth + 1);
+            showCalendar(currentMonth, currentYear);
+
+        }
+
+        function previous() {
+            currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+            currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+            var monthYear = currentYear + '-' + (currentMonth + 1);
+            showCalendar(currentMonth, currentYear);
+
+        }
+
+        function jump() {
+            currentYear = parseInt(selectYear.value);
+            currentMonth = parseInt(selectMonth.value);
+            var monthYear = currentYear + '-' + (currentMonth + 1);
+            showCalendar(currentMonth, currentYear);
+
+        }
+
+        function showCalendar(month, year) {
+
+            var firstDay = (new Date(year, month)).getDay();
+
+            tbl = document.getElementById("calendar-body");
+
+
+            tbl.innerHTML = "";
+
+
+            monthAndYear.innerHTML = months[month] + " " + year;
+            selectYear.value = year;
+            selectMonth.value = month;
+
+            // creating all cells
+            var date = 1;
+            for (var i = 0; i < 6; i++) {
+
+                var row = document.createElement("tr");
+
+
+                for (var j = 0; j < 7; j++) {
+                    if (i === 0 && j < firstDay) {
+                        cell = document.createElement("td");
+                        cellText = document.createTextNode("");
+                        cell.appendChild(cellText);
+                        row.appendChild(cell);
+                    } else if (date > daysInMonth(month, year)) {
+                        break;
+                    } else {
+                        cell = document.createElement("td");
+                        cell.setAttribute("data-date", date);
+                        cell.setAttribute("data-month", month + 1);
+                        cell.setAttribute("data-year", year);
+                        cell.setAttribute("data-month_name", months[month]);
+                        cell.className = "date-picker";
+                        cell.innerHTML = "<span>" + date + "</span>";
+
+                        if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
+                            cell.className = "date-picker selected";
+                        }
+                        row.appendChild(cell);
+                        date++;
+                    }
+
+
+                }
+
+                tbl.appendChild(row);
+            }
+
+        }
+
+        function daysInMonth(iMonth, iYear) {
+            return 32 - new Date(iYear, iMonth, 32).getDate();
+        }
+    </script>
+    <script>
+        var companyid = document.getElementById('companyId');
+        var companyname = document.getElementById('companyname');
+        var eventinfo = document.getElementById('eventinfo');
+        var sendSessionData = document.getElementById('sendSessionData');
+        var paticipantName = document.getElementById('paticipantName');
+        var paticipantPhone = document.getElementById('paticipantPhone');
+        var paticipantEmail = document.getElementById('paticipantEmail');
+        var sessionselection = document.getElementById('sessionselection');
+        var companylogo = document.getElementById('companylogo');
+        var title = document.getElementById('title');
+        title = title.getElementsByTagName('h1')[0];
+        var logo = companylogo.getElementsByTagName('img')[0];
+        var form = document.getElementById('form');
+
+        var currentUrl = window.location.href;
+        var url = new URL(currentUrl); //tách lấy phần request trong url
+        var params = url.search;
+        params = params.replace('?', '');
+        var args = params.split("&");
+        companyid.value = args[1];
+        console.log(args[1]);
+        if (args[0] === 'paticipantinfo') {
+            var paticipantinfo = lay_thong_tin_cong_ty(args[0], args[1]);
+            console.log(paticipantinfo[0]);
+            var thong_tin_cong_ty = lay_thong_tin_cong_ty('companyinfo', paticipantinfo[0].companyId);
+            sendSessionData.value = `${paticipantinfo[0].session.year + '-' +paticipantinfo[0].session.month + '-' +paticipantinfo[0].session.date + '-' +paticipantinfo[0].session.buoi}`;
+            paticipantName.value = `${paticipantinfo[0].paticipantName}`;
+            paticipantPhone.value = `${paticipantinfo[0].paticipantPhone}`;
+            paticipantEmail.value = `${paticipantinfo[0].paticipantEmail}`;
+
+            form.setAttribute('action', `${lh}req=editpaticipant&id=${paticipantinfo[0]._id}`);
+        } else if (args[0] === 'companyinfo') {
+            var thong_tin_cong_ty = lay_thong_tin_cong_ty(args[0], args[1]);
+
+            form.setAttribute('action', `${lh}addpaticipant`);
+        }
+
+        logo.setAttribute("src", `${lh}req=getlogo&name=${thong_tin_cong_ty[0].logoname}`);
+        logo.setAttribute("alt", thong_tin_cong_ty[0].companyname);
+        title.innerHTML += `${thong_tin_cong_ty[0].companyname}`;
+        companyname.value = thong_tin_cong_ty[0].companyname
+        eventinfo.value = thong_tin_cong_ty[0].eventinfo
+            // step
+        var steps = document.getElementsByClassName('steps');
+        var box = document.getElementsByClassName('box');
+        box[0].classList.add('active');
+        steps[0].classList.remove('hide');
+        var i = 0;
+
+        function next() {
+            steps[i].classList.add('hide');
+
+            i++;
+            if (i >= box.length - 1) {
+                i = box.length - 1;
+                document.getElementById('next').classList.add('hide');
+                document.getElementById('submit').classList.remove('hide');
+            }
+            if (i >= 1) {
+                document.getElementById('prev').classList.remove('hide');
+
+            }
+            steps[i].classList.remove('hide');
+            box[i].classList.add('active');
+
+        }
+
+        function prev() {
+            steps[i].classList.add('hide');
+            box[i].classList.remove('active');
+            i--;
+            if (i <= 0) {
+                i = 0;
+                box[i].classList.add('active');
+                document.getElementById('prev').classList.add('hide');
+
+            }
+            if (i > 0) {
+                document.getElementById('prev').classList.remove('hide');
+            }
+            if (i < box.length - 1) {
+                document.getElementById('next').classList.remove('hide');
+                document.getElementById('submit').classList.add('hide');
+            }
+            steps[i].classList.remove('hide');
+
+        }
+        // xắp xếp lại lịch
+        var calendar = thong_tin_cong_ty[0].session;
+
+        // end xắp xếp lại lịch
+        // end step
+        // choose button
+
+
+
+        var html;
+        var delay = async() => {
+            calendar.forEach(element => {
+                // var datedata = element.month.split('-');
+
+                var same = document.getElementById(`${element.year}${element.month}${element.date}`);
+                // console.log(typeof(typeof same));
+                if (same !== null) {
+
+                    var label = document.createElement("label");
+                    label.setAttribute('class', 'picktime');
+                    if (element.buoi === 'sang') {
+                        label.innerHTML = 'sáng';
+                        label.setAttribute('id', `${element.year}-${element.month}-${element.date}-sang`)
+                        label.setAttribute('onclick', `select(${element.year}, ${element.month}, ${element.date}, 'sang')`)
+                    } else {
+                        label.innerHTML = 'chiều';
+                        label.setAttribute('id', `${element.year}-${element.month}-${element.date}-chieu`)
+                        label.setAttribute('onclick', `select(${element.year}, ${element.month}, ${element.date}, 'chieu')`)
+                    }
+                    same.appendChild(label);
+                    html = '';
+                    console.log('abc');
+                } else {
+
+                    html += `
+                                <div id='${element.year}${element.month}${element.date}' class='slt'>
+                                    <label class="pickDate"> ${element.date} Tháng ${element.month}</label>
+                                    
+                            `;
+
+                    if (element.buoi === 'sang') {
+                        html += `
+                        
+                                    <label id="${element.year}-${element.month}-${element.date}-sang" class="picktime" onclick="select(${element.year}, ${element.month}, ${element.date}, 'sang')">Sáng</label>
+                                `;
+                    } else {
+                        html += `
+                            <label id="${element.year}-${element.month}-${element.date}-chieu" class="picktime" onclick="select(${element.year}, ${element.month}, ${element.date}, 'chieu');">Chiều</label>
+                    `;
+                    }
+
+
+
+                    html += `
+                                    
+                                </div>
+                            `;
+
+
+                }
+
+
+            })
+        }
+
+        delay().then(async() => {
+            html = html.replace('undefined', ' ');
+            console.log(html);
+            sessionselection.innerHTML += html;
+        });
+
+
+        function select(year, month, date, buoi) {
+            var picktime = document.getElementsByClassName('picktime');
+
+            for (var i = 0; i < picktime.length; i++) {
+                picktime[i].classList.remove('chosen');
+            }
+
+            var checkingString = year + '-' + month + '-' + date + '-' + buoi;
+            document.getElementById(checkingString).classList.add('chosen');
+            sendSessionData.value = checkingString;
+
+        }
+
+
+        // end choose button
+    </script>
+</body>
+
+</html>

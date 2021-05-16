@@ -1,0 +1,318 @@
+.invisible {
+    visibility: hidden;
+}
+
+#header {
+    display: flex;
+    padding: 10px 20px;
+    justify-content: space-around;
+}
+
+#header #logo {
+    display: flex;
+    justify-content: center;
+}
+
+#header #login #loginInput {
+    width: 200px;
+}
+
+#header #title {
+    color: #2c4ca1;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#header #logo img {
+    height: 100%;
+}
+
+.wrapper {
+    border-bottom: 1px solid #fff;
+}
+
+#info {
+    border-top: 1px solid #FFF !important;
+    background-color: #1e73be;
+    color: #fff;
+    height: 40px;
+}
+
+#info .box {
+    height: 40px;
+    overflow: hidden;
+}
+
+#info .box div {
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    padding: 0 20px;
+}
+
+#search {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+    align-items: flex-end;
+    background-color: #1e73be;
+}
+
+button {
+    margin: 3px 0;
+    background-color: #2c4ca1;
+    color: #fff;
+    border: none;
+    height: 30px;
+}
+
+.button {
+    margin: 3px 5px;
+    padding: 0 8px;
+    background-color: #2c4ca1;
+    color: #fff;
+    cursor: pointer;
+    height: 30px;
+    text-decoration: none;
+    line-height: 30px;
+    display: block;
+}
+
+#search>button {
+    display: block;
+}
+
+#search form {
+    display: block;
+}
+
+#search form input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px #fff dotted;
+    background-color: transparent;
+    color: #fff;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #2c4ca1;
+}
+
+.row:nth-child(odd) {
+    background-color: #f3f3f3;
+}
+
+.row .index {
+    min-width: 30px;
+    text-align: center;
+}
+
+.row .box {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row .box .col form button {
+    display: block;
+}
+
+.row .box .col form a {
+    display: block;
+}
+
+.row .box .col img {
+    width: 100px;
+}
+
+.row .box .col span {
+    font-weight: bold;
+}
+
+.row .box .col .minibox p {
+    margin: 5px 0;
+}
+
+
+/* login */
+
+.backgroundform {
+    background: url(../imgs/login-background.jpg) no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.customerform {
+    height: 100% !important;
+}
+
+#loginpage .wrapper {
+    width: 480px;
+}
+
+.backgroundform .wrapper {
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    background: inherit;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.backgroundform .wrapper:before {
+    content: "";
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+    filter: blur(10px);
+    margin: -20px;
+}
+
+.backgroundform .wrapper .logo {
+    width: 480px;
+    display: flex;
+    justify-content: center;
+}
+
+.backgroundform .wrapper .logo img {
+    width: 50%;
+    margin: 30px 0 0 0;
+}
+
+.backgroundform .wrapper form {
+    margin: 10px 0 30px 0;
+    color: #333;
+}
+
+.backgroundform .wrapper form div {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+.backgroundform .wrapper form span {
+    display: block;
+    width: 70px;
+}
+
+.backgroundform .wrapper form button {
+    padding: 3px 10px;
+}
+
+.backgroundform .wrapper form input {
+    background-color: transparent;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #333;
+}
+
+
+/* end login */
+
+
+/* register form */
+
+#register .wrapper {
+    max-width: 1200px;
+}
+
+#register .wrapper #heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#register .wrapper .title h1 {
+    margin: 0;
+    text-align: center;
+    color: #2c4ca1
+}
+
+#register .wrapper form .form-group {
+    margin: 10px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#register .wrapper form>.form-group>label {
+    width: 130px;
+    display: inline-block;
+    font-weight: 700;
+}
+
+#register .wrapper form .form-group input {
+    background-color: transparent;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #333;
+}
+
+.datewrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+#sessionselection {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#sessionselection label {
+    font-weight: 700;
+}
+
+#comInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 480px;
+}
+
+#comInfo #companynametitle {
+    text-align: center;
+    font-size: 20px;
+    color: #2c4ca1;
+    margin: 10px 0;
+}
+
+#comInfo #companylogo {
+    max-width: 50%;
+    max-height: 77px;
+}
+
+#customerselection {
+    display: flex;
+    flex-direction: column;
+}
+
+#customerselection>label {
+    font-weight: 700;
+}
+
+#customerselection .form-group label {
+    flex: 1;
+}
+
+#sessionselection input {
+    margin-bottom: 10px;
+}
+
+
+/* endregister form */

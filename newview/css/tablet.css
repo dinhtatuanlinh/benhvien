@@ -1,0 +1,56 @@
+.hide-medium {
+    display: none;
+}
+
+.row .box .col {
+    padding: 5px 20px;
+}
+
+#header {
+    height: 95px;
+    justify-content: space-between;
+}
+
+#header #logo {
+    width: 300px;
+}
+
+#header #logo a {
+    width: 100%;
+}
+
+#header #login {
+    width: 240px;
+}
+
+#header #title h1 {
+    margin: 0;
+    font-size: 25px;
+}
+
+#header #login form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#header #login form div {
+    margin: 3px 0;
+    display: flex;
+    justify-content: center;
+}
+
+#header #login form label {
+    display: inline-block;
+    width: 80px;
+    margin-right: 3px;
+}
+
+#header #login form input {
+    width: 150px;
+}
+
+.row .index {
+    line-height: 265px;
+    border-right: 1px solid #2c4ca1;
+}
