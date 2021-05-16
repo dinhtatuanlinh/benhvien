@@ -12,6 +12,7 @@ var database = require('./libs/database');
 var getfiles = require('./libs/getfiles');
 var sendsmszalo = require('./libs/sendsmszalo');
 var sessionFunc = require('./libs/sessionfunc');
+var MD5 = require('./libs/md5');
 
 var ObjectId = require('mongodb').ObjectID;
 var MongoClient = mongodb.MongoClient;
@@ -223,21 +224,26 @@ var Dich_vu = http.createServer(async function(req, res) {
         //Khởi tạo form
         var form = new formidable.IncomingForm();
         form.parse(req, async function(err, fields, file) {
-
-            fields.avartar = '';
-            fields.accesstime = '';
-
-            var dataresult = await database.insertdata(usersCollection, db, fields);
+            var args = { username: fields.username };
+            var getuser = await database.getlist(usersCollection, db, args);
+            if (getuser.length > 0) {
+                res.writeHead(301, { Location: `${clienturl}existense.html` });
+                res.end();
+            } else {
+                fields.avartar = '';
+                fields.accesstime = '';
+                var dataresult = await database.insertdata(usersCollection, db, fields);
+                res.writeHead(301, { Location: `${clienturl}success.html` });
+                res.end();
+            }
         });
-        res.writeHead(301, { Location: `${clienturl}success.html` });
-        res.end();
         return;
     }
     // create superadmin
     if (order.req === 'superadmin' && order.auth === '164342816') {
         var data = {};
         data.username = 'dinhtatuanlinh';
-        data.password = '164342816';
+        data.password = MD5.MD5('164342816');
         data.email = 'dinhtatuanlinh@gmail.com';
         data.phone = '0945078855';
         data.birthday = '28-12-1989';
@@ -394,7 +400,9 @@ var Dich_vu = http.createServer(async function(req, res) {
             var data = {};
 
             // data.attend = [];
-
+            var args = { _id: ObjectId(fields.companyId) };
+            var companydata = await database.getlist(companiesCollection, db, args);
+            companydata.session
 
             data.location = fields.location
             data.companyId = fields.companyId;
