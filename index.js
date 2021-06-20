@@ -352,8 +352,8 @@ var Dich_vu = http.createServer(async function(req, res) {
         editdata.companyname = paticipantinfo[0].companyname;
         editdata.eventinfo = paticipantinfo[0].eventinfo;
         // console.log(paticipantinfo);
-
-
+        var comArgs = { _id: ObjectId(paticipantinfo[0].companyId) };
+        var companydata = await database.getlist(companiesCollection, db, comArgs);
         form.parse(req, async function(err, fields, file) {
             var delay = async() => {
                 editdata.location = '15 Trịnh Văn Cấn';
@@ -367,8 +367,51 @@ var Dich_vu = http.createServer(async function(req, res) {
                 editdata.session.date = a[2];
                 editdata.session.buoi = a[3];
 
+
+                console.log(companydata);
+                for (var i = 0; i < companydata[0].session.length; i++) {
+                    if (companydata[0].session[i].year === paticipantinfo[0].session.year &&
+                        companydata[0].session[i].month === paticipantinfo[0].session.month &&
+                        companydata[0].session[i].date === paticipantinfo[0].session.date &&
+                        companydata[0].session[i].buoi === paticipantinfo[0].session.buoi) {
+                        companydata[0].session[i].regNum = companydata[0].session[i].regNum - 1;
+
+                        // if (parseInt(companydata[0].session[i].number) > companydata[0].session[i].regNum) {
+                        //     companydata[0].session[i].regNum++;
+                        //     delete companydata[0]._id;
+                        //     await database.editARecord(companiesCollection, db, companydata[0], args);
+                        //     checkErrorSession = true;
+                        //     // console.log(companydata[0]);
+                        // } else {
+                        //     res.writeHead(301, { Location: `${clienturl}full.html` });
+                        //     res.end();
+                        // }
+                        break;
+                    }
+                }
+
+
             }
             delay().then(async() => {
+                var checkErrorSession = false;
+                for (var i = 0; i < companydata[0].session.length; i++) {
+                    if (companydata[0].session[i].year === editdata.session.year &&
+                        companydata[0].session[i].month === editdata.session.month &&
+                        companydata[0].session[i].date === editdata.session.date &&
+                        companydata[0].session[i].buoi === editdata.session.buoi) {
+                        if (parseInt(companydata[0].session[i].number) > companydata[0].session[i].regNum) {
+                            companydata[0].session[i].regNum++;
+                            delete companydata[0]._id;
+                            await database.editARecord(companiesCollection, db, companydata[0], comArgs);
+                            checkErrorSession = true;
+                            console.log(companydata[0]);
+                        } else {
+                            res.writeHead(301, { Location: `${clienturl}full.html` });
+                            res.end();
+                        }
+                        break;
+                    }
+                }
 
                 await database.editARecord(paticipantCollection, db, editdata, args)
                     // sendemail
@@ -379,7 +422,7 @@ var Dich_vu = http.createServer(async function(req, res) {
                 var emailcontent = `Bạn đã sửa thành công tham gia sự kiện ${fields.eventinfo} của công ty ${fields.companyname}, vào buổi ${editdata.session.buoi} ngày ${editdata.session.date}-${editdata.session.month}-${editdata.session.year}, tại 15 Trịnh Văn Cấn. Email này thay cho giấy mời. Truy cập vào link sau để sửa thông tin ${clienturl}customerform.html?paticipantinfo&${order.id}`;
                 var emailresult = await email.sendemail(from, to, subject, emailcontent);
                 var note = to.replace(".com", "");
-                var smszalo = await sendsmszalo.send(editdata.paticipantPhone, note)
+                var smszalo = await sendsmszalo.send(editdata.paticipantPhone, note);
 
             })
 
@@ -407,8 +450,8 @@ var Dich_vu = http.createServer(async function(req, res) {
             data.session.month = a[1];
             data.session.date = a[2];
             data.session.buoi = a[3];
-            console.log(fields.companyId)
-                // data.attend = [];
+            // console.log(fields.companyId)
+            // data.attend = [];
             var args = { _id: ObjectId(fields.companyId) };
             var companydata = await database.getlist(companiesCollection, db, args);
             // console.log(companydata[0].session);
