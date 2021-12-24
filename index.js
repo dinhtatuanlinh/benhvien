@@ -5,6 +5,7 @@ var querystring = require('query-string'); // hàm xử lý chuỗi url
 var mongodb = require('mongodb');
 var formidable = require('formidable'); // module này để lấy thông tin từ form
 const excelToJson = require('convert-excel-to-json');
+const axios = require('axios'); // module httprequest ajax
 
 //var sms = require('./libs/sendsms');
 var email = require('./libs/sendemail');
@@ -687,6 +688,29 @@ var Dich_vu = http.createServer(async function(req, res) {
         res.setHeader('Access-Control-Allow-Credentials', true);
         // xóa 1 company record
         // console.log(order);
+        if (req.url === '/abc') {
+            let axiosData = {
+                guid: 'FB057E6D-E772-4282-9BA4-F5B6334AA66D',
+                from_date: '17/09/2021',
+                to_date: '18/09/2021'
+            }
+            axiosData = JSON.stringify(axiosData);
+            let request = () => {
+                return new Promise((res, rej) => {
+                    let result = axios.post('https://betaapi.autoads.asia/PushNotification/api/contact/getcontacts', axiosData, {
+                        headers: {
+                            // Overwrite Axios's automatically set Content-Type
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    res(result);
+                })
+            }
+
+            request().then(data => {
+                console.log(data.data.Data);
+            })
+        }
         if (order.req === 'delcompany' && order.id !== undefined && order.id !== null && order.salerId !== undefined && order.salerId !== null) {
 
             args = { _id: ObjectId(order.id) };

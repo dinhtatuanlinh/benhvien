@@ -10,6 +10,7 @@ function getCalendar(month) {
     var Xu_ly_HTTP = new XMLHttpRequest();
     Dia_chi_Xu_ly = `${lh}req=getCalendar&month=${month}`;
     Xu_ly_HTTP.open("POST", Dia_chi_Xu_ly, false);
+    Xu_ly_HTTP.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     Xu_ly_HTTP.send("");
     var Chuoi_JSON = Xu_ly_HTTP.responseText;
     // if (Chuoi_JSON = "xoa member thanh cong") { location.reload() }
@@ -26,6 +27,7 @@ function lay_thong_tin_cong_ty(Tham_so, id, salerid) {
 
 
     Xu_ly_HTTP.open("POST", Dia_chi_Xu_ly, false);
+    Xu_ly_HTTP.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     Xu_ly_HTTP.send("");
     var Chuoi_JSON = Xu_ly_HTTP.responseText;
     // if (Chuoi_JSON = "xoa member thanh cong") { location.reload() }
@@ -44,7 +46,7 @@ function delACompany(Tham_so, id, salerId) {
     Dia_chi_Xu_ly = `${lh}req=${Tham_so}&id=${id}&salerId=${salerId}`;
     console.log(Dia_chi_Xu_ly)
     Xu_ly_HTTP.open("POST", Dia_chi_Xu_ly, false);
-
+    Xu_ly_HTTP.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     Xu_ly_HTTP.send("");
 
     var Chuoi_JSON = Xu_ly_HTTP.responseText;
@@ -63,6 +65,7 @@ function deletearecord(Tham_so, data) {
     Dia_chi_Xu_ly = `${lh}${Tham_so}`;
 
     Xu_ly_HTTP.open("POST", Dia_chi_Xu_ly, false);
+    Xu_ly_HTTP.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     Xu_ly_HTTP.send(data);
     var Chuoi_JSON = Xu_ly_HTTP.responseText;
     var Du_lieu = {};
@@ -76,6 +79,7 @@ function getsession(id) {
     var Dia_chi_Xu_ly = `${lh}req=getsession&id=${id}`
     var Xu_ly_HTTP = new XMLHttpRequest();
     Xu_ly_HTTP.open("POST", Dia_chi_Xu_ly, false);
+    Xu_ly_HTTP.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     Xu_ly_HTTP.send("");
     var Chuoi_JSON = Xu_ly_HTTP.responseText;
     // console.log(Chuoi_JSON);
@@ -86,9 +90,10 @@ function getsession(id) {
 
 function sendCookie(data) {
     var Dia_chi_Xu_ly;
-    var Xu_ly_HTTP = new XMLHttpRequest();
+    var Xu_ly_HTTP = new XMLHttpRequest() || ActiveXObject();
     Dia_chi_Xu_ly = `${lh}cookie`;
     Xu_ly_HTTP.open("POST", Dia_chi_Xu_ly, false);
+    Xu_ly_HTTP.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     Xu_ly_HTTP.send(data)
     var Chuoi_JSON = Xu_ly_HTTP.responseText;
     // console.log(Chuoi_JSON);
